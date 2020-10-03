@@ -1,0 +1,18 @@
+.login-header{
+    background-color: rgba(226, 223, 223, 0.65);
+    padding: 1em;
+    text-align: center;
+}
+.login{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /*margin-top: -100px;*/
+    /*margin-left: -100px;*/
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.login * {
+    margin-bottom: 10px;
+}
