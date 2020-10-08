@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const accountsRouter = require('./routes/account.route');
+const managersRouter = require('./routes/publicTransportManager.route');
 
 const app = express();
 
@@ -35,16 +36,11 @@ mongoose
 //     client.close();
 // });
 
-
 // use routes
 app.use('/accounts', accountsRouter);
+app.use('/managers', managersRouter);
 
 const port = process.env.PORT || 5000;
-
-// app.get('/', (req, res)=> {
-//     const c = [{accNo: 'z1234', credit:1234}];
-//     res.json(c);
-// })
 
 app.listen(port, err => {
     if (err) {

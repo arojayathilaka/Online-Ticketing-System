@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import './components.css';
-import axios from 'axios'
+import './PassengerLogin.css';
+import axios from 'axios';
+import swal from "sweetalert";
 
-class Login extends Component {
+class PassengerLogin extends Component {
 
     constructor() {
         super();
@@ -37,22 +38,34 @@ class Login extends Component {
     onSubmit = e => {
         e.preventDefault();
         if(this.state.accounts.find(e => e.accNo === this.state.accNo)){
-            console.log('success')
+            console.log('success');
+            swal({
+                title: "Login Successful!",
+                text: "Welcome to Sri Lanka Public Transport!",
+                icon:"success",
+                button: { className: "swal-btn"}
+            });
         } else{
             console.log('failed')
+            swal({
+                title: "Account Number is Invalid!",
+                text: "Enter a Valid Account Number!",
+                icon:"error",
+                dangerMode: true
+            });
         }
     }
 
     render() {
         return (
-            <div>
-                <h5 className="login-header">Login to System</h5>
+            <div className="image-bg-p">
+                <h5 className="login-header">Passenger Login</h5>
                 <div className="login">
                     <form onSubmit={this.onSubmit}>
-                        <h5>Account no</h5>
-                        <input type="text" onChange={this.onChangeAccountNo}/>
+                        <h5 style={{ color:"white" }}>Account No</h5>
+                        <input style={{ width:"250px", height:"35px" }} type="text" onChange={this.onChangeAccountNo}/>
                         <div>
-                            <input type="submit" value="Login" className="btn btn-primary" />
+                            <input type="submit" value="Passenger Login" className="btn btn-primary" />
                         </div>
                     </form>
                 </div>
@@ -61,4 +74,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default PassengerLogin;

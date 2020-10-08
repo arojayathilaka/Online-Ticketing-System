@@ -21,16 +21,13 @@ router.route('/').get((req, res) => {
  * @param {number} credit credit of the account
  * @returns success or error message
  */
-router.route('/create').post((req, res) => {
+router.route('/add').post((req, res) => {
     const accNo = req.body.accNo;
     const credit = Number(req.body.credit);
 
     console.log(req.body);
 
-    const newAccount = new Account({
-        accNo,
-        credit
-    });
+    const newAccount = new Account({ accNo, credit });
     newAccount.save()
         .then(() => res.send({message: 'Account created!'}))
         .catch(err =>
