@@ -7,6 +7,7 @@ require('dotenv').config();
 const accountsRouter = require('./routes/account.route');
 const managersRouter = require('./routes/publicTransportManager.route');
 const journeyRouter = require('./routes/makeJourney.route');
+const expressJourneyRouter = require('./routes/makeJourneyExpress.route');
 const creditsRouter = require('./routes/credits.route');
 
 const app = express();
@@ -42,6 +43,7 @@ mongoose
 app.use('/accounts', accountsRouter);
 app.use('/managers', managersRouter);
 app.use('/journey', journeyRouter);
+app.use('/express', expressJourneyRouter);
 app.use('/credit', creditsRouter);
 
 const port = process.env.PORT || 5000;
