@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const journeySchema = new Schema(
+const journeyExpressSchema = new Schema(
     {
         acNo: { type: String, required: true },
         tokenID: {type: String, required: true},
-        startPoint: {type: String, required: true},
-        desPoint: {type: String, required: true},
+        expressWay: {type: String, required: true},
         appFare: {type: String, required: true},
         distance: {type: Number, required: true},
         jDate: {type: String, required: true},
@@ -19,6 +18,6 @@ const journeySchema = new Schema(
     }
 );
 
-const JourneyNormal = mongoose.model('NormalJourney',journeySchema);
+const JourneyExpress = mongoose.model('ExpressWay',journeyExpressSchema);
 
-module.exports = JourneyNormal;
+module.exports = JourneyExpress;
