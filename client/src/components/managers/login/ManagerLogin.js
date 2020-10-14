@@ -42,9 +42,13 @@ class ManagerLogin extends Component {
             swal({
                 title: "Login Successful!",
                 text: "Welcome to Sri Lanka Public Transport!",
-                icon:"success",
-                button: { className: "swal-btn"}
-            });
+                icon: "success",
+                button: {className: "swal-btn"}
+            })
+                .then(result => {
+                    if (result)
+                        window.location = '/managers/main'
+                })
         } else{
             console.log('failed')
             swal({

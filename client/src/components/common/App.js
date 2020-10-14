@@ -7,10 +7,8 @@ import PassengerLogin from "../passengers/login/PassengerLogin";
 import ManagerLogin from "../managers/login/ManagerLogin";
 import Passengers from "../managers/statistics/Passengers";
 import Fares from "../managers/statistics/Fares";
-import PassengersNavBar from "../passengers/PassengersNavBar";
-import ManagersNavBar from "../managers/ManagersNavBar";
+import Main from "../managers/statistics/Main";
 import JourneyDetails from "../journeyDetails/JourneyDetails";
-
 class App extends Component  {
     render() {
         return(
@@ -21,14 +19,9 @@ class App extends Component  {
                         <Route path="/passengerLogin" component={PassengerLogin} exact/>
                         <Route path="/managerLogin" component={ManagerLogin} exact/>
                         <Route path="/journeyDetails" component={JourneyDetails} exact/>
-                        <div>
-                            <PassengersNavBar/>
-                        </div>
-                        <div>
-                            <ManagersNavBar/>
-                            <Route path="/passengers" component={Passengers} exact/>
-                            <Route path="/fares" component={Fares} exact/>
-                        </div>
+                        <Route path="/managers/main" component={Main} exact/>
+                        <Route path="/managers/passengers" component={Passengers} exact/>
+                        <Route path="/managers/fares" component={Fares} exact/>
                     </Switch>
                 </Router>
             </div>

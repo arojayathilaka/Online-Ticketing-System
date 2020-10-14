@@ -104,10 +104,10 @@ class MakeJourney extends Component{
         e.preventDefault();
 
 
-            var tot = this.state.distance * 10;
-            this.setState({
-                fare: tot
-            })
+        var tot = this.state.distance * 10;
+        this.setState({
+            fare: tot
+        })
 
 
 
@@ -133,18 +133,18 @@ class MakeJourney extends Component{
 
         axios.post('http://localhost:5000/journey/add', journey)
             .then(res => {
-                if (res.data.success === true) {
-                    this.sweetalertfunction();
-                }
-                if (res.data.success === false) {
-                    swal({
-                        title: "Store Manager Not Added!",
-                        text: res.data.message,
-                        icon: "error",
-                        button: true,
-                        dangerMode: true,
-                    });
-                }
+                    if (res.data.success === true) {
+                        this.sweetalertfunction();
+                    }
+                    if (res.data.success === false) {
+                        swal({
+                            title: "Store Manager Not Added!",
+                            text: res.data.message,
+                            icon: "error",
+                            button: true,
+                            dangerMode: true,
+                        });
+                    }
                 }
 
             );
