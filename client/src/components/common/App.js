@@ -9,6 +9,7 @@ import Passengers from "../managers/statistics/Passengers";
 import Fares from "../managers/statistics/Fares";
 import PassengersNavBar from "../passengers/PassengersNavBar";
 import ManagersNavBar from "../managers/ManagersNavBar";
+import JourneyDetails from "../journeyDetails/JourneyDetails";
 
 class App extends Component  {
     render() {
@@ -19,6 +20,7 @@ class App extends Component  {
                         <Route path="/" component={LoginHome} exact/>
                         <Route path="/passengerLogin" component={PassengerLogin} exact/>
                         <Route path="/managerLogin" component={ManagerLogin} exact/>
+                        <Route path="/journeyDetails" component={JourneyDetails} exact/>
                         <div>
                             <PassengersNavBar/>
                         </div>
