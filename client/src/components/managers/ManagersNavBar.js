@@ -17,7 +17,7 @@ class ManagersNavBar extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-item nav-link" href="/bookings">Bookings</a>
+                        <a className="nav-item nav-link" href="/bookings">Login</a>
                     </div>
                 </div>
             </nav>
