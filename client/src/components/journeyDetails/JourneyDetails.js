@@ -57,7 +57,7 @@ class JourneyDetails extends Component {
                         <th scope="col">Fare</th>
                     </tr>
                     </thead>
-                    <tbody style={{backgroundColor:"#AF7AC5"}}>
+                    <tbody style={{backgroundColor:"#A09D9C"}}>
 
 
                     {this.state.journeyDetails.map(journey => (
