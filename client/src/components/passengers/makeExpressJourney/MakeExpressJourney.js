@@ -50,6 +50,11 @@ class MakeExpressJourney extends Component{
         });
     }
 
+    onChangeDistance(e){
+        this.setState({
+            distance: e.target.value
+        });
+    }
 
     onChangeDate(e){
         this.setState({
@@ -123,7 +128,7 @@ class MakeExpressJourney extends Component{
                 fare: 450
             });
         }
-        
+
     }
 
     onSubmit = e => {

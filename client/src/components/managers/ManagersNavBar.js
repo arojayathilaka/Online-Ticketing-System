@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class NavBar extends Component {
+class ManagersNavBar extends Component {
 
     render() {
         return (
@@ -17,7 +17,7 @@ class NavBar extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-item nav-link" href="/bookings">Bookings</a>
+                        <a className="nav-item nav-link" href="/bookings">Login</a>
                     </div>
                 </div>
             </nav>
@@ -25,4 +25,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar
+export default ManagersNavBar
