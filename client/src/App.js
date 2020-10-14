@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoginHome from "./components/login/LoginHome/LoginHome";
 import PassengerLogin from "./components/login/PassengerLogin/PassengerLogin";
 import ManagerLogin from "./components/login/ManagerLogin/ManagerLogin";
+import MakeExpressJourney from "./components/makeExpressJourney/MakeExpressJourney";
+import MakeJourney from "./components/makeJourney/MakeJourney";
 
 class App extends Component  {
     render() {
@@ -16,6 +18,8 @@ class App extends Component  {
                         <Route path="/" component={LoginHome} exact/>
                         <Route path="/passengerLogin" component={PassengerLogin} exact/>
                         <Route path="/managerLogin" component={ManagerLogin} exact/>
+                        <Route path="/expressWay" component={MakeExpressJourney} exact/>
+                        <Route path="/normalWay" component={MakeJourney} exact/>
                         <div>
                             <NavBar/>
                         </div>

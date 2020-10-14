@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const journeyExpressSchema = new Schema(
     {
-        acNo: { type: String, required: true },
+        accNo: { type: String, required: true },
         tokenID: {type: String, required: true},
         expressWay: {type: String, required: true},
         appFare: {type: String, required: true},

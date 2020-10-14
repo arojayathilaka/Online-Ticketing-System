@@ -36,10 +36,10 @@ router.route('/add').post((req, res) => {
         );
 });
 
-router.route('/viewAcc').get((req, res) => {
+router.route('/viewAcc').post((req, res) => {
 
     const accNo = req.body.accNo;
-
+    console.log("hii");
     Account.find({
         accNo: accNo
     },(err, accounts) => {
@@ -61,11 +61,13 @@ router.route('/viewAcc').get((req, res) => {
             });
         })
 
+        //console.log(account._id);
+
     });
 
 });
 
-router.route('/update/:id').put((req, res) => {
+/*router.route('/update/:id').put((req, res) => {
     Account.findById(req.params.id)
         .then(account => {
             account.accNo = req.body.accNo;
@@ -80,6 +82,55 @@ router.route('/update/:id').put((req, res) => {
         .catch(err =>
             res.status(400).json('Error: ' + err)
         );
+});*/
+
+router.route('/update').put((req, res) => {
+
+    const accNo = req.body.accNo;
+    const credit = Number(req.body.credit);
+
+    if (!accNo){
+        return res.send({
+            success: false,
+            message: 'Account can not be blank.'
+        });
+    }
+
+
+    console.log('here');
+
+    Account.find({
+        accNo: accNo
+    },(err, updateUsers) =>{
+
+        if(err){
+            console.log('amanda');
+            return res.send({
+                success: false,
+                message: 'Error: Server error'
+            });
+
+        }
+
+        const updateUser = updateUsers[0];
+        updateUser.accNo = accNo;
+        updateUser.credit = credit;
+
+        updateUser.save((err, user) => {
+            if(err){
+                return res.send({
+                    success: false,
+                    message: 'Error: Server error'
+                });
+            }
+            return res.send({
+                success: true,
+                message: 'User updated.'
+            });
+        })
+
+    });
+
 });
 
 

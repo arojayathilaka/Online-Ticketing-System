@@ -14,7 +14,7 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
 
-    const acNo = req.body.acNo;
+    const accNo = req.body.accNo;
     const tokenID = req.body.tokenID;
     const expressWay = req.body.expressWay;
     const appFare = req.body.appFare;
@@ -25,7 +25,7 @@ router.route('/add').post((req, res) => {
 
     console.log(req.body);
 
-    const newJourneyExpress = new JourneyExpress({ acNo, tokenID, expressWay, appFare, distance, jDate, jTime, fare });
+    const newJourneyExpress = new JourneyExpress({ accNo, tokenID, expressWay, appFare, distance, jDate, jTime, fare });
     newJourneyExpress.save()
         .then(() => res.send({message: 'Journey Added!'}))
         .catch(err =>
