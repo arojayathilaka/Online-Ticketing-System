@@ -3,15 +3,6 @@ import ManagersNavBar from "../ManagersNavBar";
 import axios from 'axios';
 import './Fares.css';
 
-/*const JourneyNormal = props => {
-    <tr>
-        <td>{props.journeynormal.acNo}</td>
-        <td>{props.journeynormal.tokenID}</td>
-        <td>{props.journeynormal.jDate.substring(0,10)}</td>
-        <td>{props.journeynormal.fare}</td>
-    </tr>
-}*/
-
 class Fares extends Component {
     constructor() {
         super();
@@ -39,12 +30,6 @@ class Fares extends Component {
             .catch(err => console.log(err))
         console.log(this.state.expressJourneys);
     }
-
-    /*fareList(){
-        return this.state.journey.map(currentjourney => {
-            return <JourneyNormal journeynormal={currentjourney} key={currentjourney._id}/>;
-        })
-    }*/
 
     render() {
         return (
@@ -80,22 +65,31 @@ class Fares extends Component {
                         </div>
                     </div>
                 </div>
-                <h3>Fare Statistics Table</h3>
-                <table className="fare_table">
-                    <thead className="table-light">
+                <br/>
+                <h3 className="mt-1 mb-5" align="center">Fare Statistics Table</h3>
+                <div className="container">
+                <table className="table table-dark table-hover">
+                    <thead>
                         <tr>
-                            <th>Account Number</th>
-                            <th>Token ID</th>
-                            <th>Journey Date</th>
-                            <th>Fare</th>
+                            <th scope="col">Account Number</th>
+                            <th scope="col">Token ID</th>
+                            <th scope="col">Journey Date</th>
+                            <th scope="col">Fare</th>
                         </tr>
                     </thead>
-                    {/*<tbody>
-                        { this.fareList() }
-                    </tbody>*/}
+                    <tbody style={{backgroundColor:"#A09D9C"}}>
+                    {this.state.journeys.map(journey => (
+                        <tr key={journey._id}>
+                            <td>{journey.accNo}</td>
+                            <td>{journey.tokenID}</td>
+                            <td>{journey.jDate}</td>
+                            <td>{journey.fare}</td>
+                        </tr>
+                    ))}
+                    </tbody>
                 </table>
+                </div>
             </div>
-
         );
     }
 }
