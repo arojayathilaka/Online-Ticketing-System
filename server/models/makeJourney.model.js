@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const journeySchema = new Schema(
     {
-        acNo: { type: String, required: true },
+        accNo: { type: String, required: true },
         tokenID: {type: String, required: true},
         startPoint: {type: String, required: true},
         desPoint: {type: String, required: true},
