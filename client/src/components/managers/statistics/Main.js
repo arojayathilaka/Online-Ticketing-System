@@ -15,7 +15,7 @@ class Main extends Component {
             <div>
                 <ManagersNavBar/>
                 <button onClick={()=> window.location = "/managers/passengers"}>Passengers</button>
-                <button>Fares</button>
+                <button onClick={()=> window.location = "/managers/fares"}>Fares</button>
             </div>
         );
     }
