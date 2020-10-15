@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
 
+
 class MakeJourney extends Component{
 
     constructor(props) {
@@ -11,28 +12,34 @@ class MakeJourney extends Component{
         this.onChangeTokenId = this.onChangeTokenId.bind(this);
         this.onChangeStartPoint = this.onChangeStartPoint.bind(this);
         this.onChangeDesPoint = this.onChangeDesPoint.bind(this);
-        this.onChangeAppFare = this.onChangeAppFare.bind(this);
         this.onChangeDistance = this.onChangeDistance.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeTime = this.onChangeTime.bind(this);
+        this.calculateTotalBill = this.calculateTotalBill.bind(this);
+        this.sweetalertfunction = this.sweetalertfunction.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            acNo: '',
+            id: '',
+            accNo: '',
             tokenID: '',
             startPoint: '',
             desPoint: '',
-            appFare: '',
+            appFare: 'Variable',
             distance: 0,
             jDate: '',
             jTime: '',
-            fare: 0
+            fare: 0,
+            accountDetails: [],
+            credit: 0
         }
 
     }
 
+
     onChangeUserAc(e){
         this.setState({
-            acNo: e.target.value
+            accNo: e.target.value
         });
     }
 
@@ -54,12 +61,6 @@ class MakeJourney extends Component{
         });
     }
 
-    onChangeAppFare(e){
-        this.setState({
-            appFare: e.target.value
-        });
-    }
-
     onChangeDistance(e){
         this.setState({
             distance: e.target.value
@@ -78,6 +79,22 @@ class MakeJourney extends Component{
         });
     }
 
+    componentDidMount() {
+
+        axios.get('http://localhost:5000/journey/getId')
+            .then(res => {
+                console.log(res.data.data);
+                this.setState({
+                    id: res.data.data
+                })
+
+            })
+            .catch(err =>
+                console.log(err)
+            )
+
+    }
+
     sweetalertfunction(){
         swal({
             title: "Journey details Added",
@@ -86,11 +103,12 @@ class MakeJourney extends Component{
             button: true,
         }).then(()=>{
             this.setState({
-                acNo: '',
+                id: '',
+                accNo: '',
                 tokenID: '',
                 startPoint: '',
                 desPoint: '',
-                appFare: '',
+                appFare: 'Variable',
                 distance: 0,
                 jDate: '',
                 jTime: '',
@@ -119,7 +137,8 @@ class MakeJourney extends Component{
         e.preventDefault();
 
         const journey = {
-            acNo: this.state.acNo,
+            id: this.state.id,
+            accNo: this.state.accNo,
             tokenID: this.state.tokenID,
             startPoint: this.state.startPoint,
             desPoint: this.state.desPoint,
@@ -131,14 +150,57 @@ class MakeJourney extends Component{
 
         }
 
+        axios.get('http://localhost:5000/accounts/')
+            .then(response =>{
+
+                this.setState({accountDetails: response.data})
+                for (var i = 0;i < this.state.accountDetails.length;i++){
+                    if (this.state.accountDetails[i].accNo === this.state.accNo){
+                        console.log(this.state.accountDetails[i].credit)
+                        this.setState({
+                            credit: this.state.accountDetails[i].credit - this.state.fare
+                        })
+                    }
+
+                }
+                const newAccount = {
+                    accNo: this.state.accNo,
+                    credit: this.state.credit
+                };
+
+                axios.put('http://localhost:5000/accounts/update', newAccount)
+                    .then(res => {
+                            console.log(res);
+                            if (res.status === 200) {
+                                //this.sweetalertfunction();
+                                console.log("hi");
+                            }
+                            else {
+                                swal({
+                                    title: "Journey Details Not Added!",
+                                    text: res.data.message,
+                                    icon: "error",
+                                    button: true,
+                                    dangerMode: true,
+                                });
+                            }
+                        }
+
+                    );
+
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
+
         axios.post('http://localhost:5000/journey/add', journey)
             .then(res => {
-                if (res.data.success === true) {
+                if (res.status === 200) {
                     this.sweetalertfunction();
                 }
-                if (res.data.success === false) {
+                else {
                     swal({
-                        title: "Store Manager Not Added!",
+                        title: "Journey Details Not Added!",
                         text: res.data.message,
                         icon: "error",
                         button: true,
@@ -158,10 +220,17 @@ class MakeJourney extends Component{
 
                 <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"#E8F8F5"}}>
                     <div className="form-group">
+                        <label>Journey Id: </label>
+                        <input type="text"
+                               className="form-control"
+                               value={this.state.id}
+                        />
+                    </div>
+                    <div className="form-group">
                         <label>Your Account Number: </label>
                         <input type="text"
                                className="form-control"
-                               value={this.state.acNo}
+                               value={this.state.accNo}
                                onChange={this.onChangeUserAc}
                         />
                     </div>
@@ -190,12 +259,7 @@ class MakeJourney extends Component{
                         />
                     </div>
                     <div className="form-group">
-                        <label>Applied Fare: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.appFare}
-                               onChange={this.onChangeAppFare}
-                        />
+                        <label>Applied Fare: Variable</label>
                     </div>
                     <div className="form-group">
                         <label>Distance: </label>
@@ -207,7 +271,7 @@ class MakeJourney extends Component{
                     </div>
                     <div className="form-group">
                         <label>Journey Date: </label>
-                        <input type="text"
+                        <input type="date"
                                className="form-control"
                                value={this.state.jDate}
                                onChange={this.onChangeDate}
@@ -222,15 +286,18 @@ class MakeJourney extends Component{
                         />
                     </div>
                     <div className="form-group">
+                        <button onClick={this.calculateTotalBill}>Calculate Fare</button>
+                    </div>
+                    <div className="form-group">
                         <label>Your Journey Fare: </label>
-                        <input type="password"
+                        <input type="text"
                                className="form-control"
                                value={this.state.fare}
                         />
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Add StoreManagers" style={{ color:"#fff",backgroundColor:"#0097A7"}} className="btn"/>
+                        <input type="submit" value="Add Journey" style={{ color:"#fff",backgroundColor:"#0097A7"}} className="btn"/>
                     </div>
                 </form>
             </div>
@@ -239,3 +306,5 @@ class MakeJourney extends Component{
     }
 
 }
+
+export default MakeJourney;

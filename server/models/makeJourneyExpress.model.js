@@ -4,12 +4,13 @@ const Schema = mongoose.Schema;
 
 const journeyExpressSchema = new Schema(
     {
-        acNo: { type: String, required: true },
+        id: { type: String, required: true},
+        accNo: { type: String, required: true },
         tokenID: {type: String, required: true},
         expressWay: {type: String, required: true},
         appFare: {type: String, required: true},
         distance: {type: Number, required: true},
-        jDate: {type: String, required: true},
+        jDate: {type: Date, required: true},
         jTime: {type: String, required: true},
         fare: {type: Number, required: true}
     },

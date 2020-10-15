@@ -22,7 +22,7 @@ class ManagerLogin extends Component {
                 this.setState({
                     managers: managers.data
                 })
-                console.log(this.state.managers)
+
             })
             .catch(err =>
                 console.log(err)
