@@ -12,7 +12,11 @@ class Passengers extends Component {
             journeys: [],
             expressJourneys: [],
             searchBy: 'loc',
-            time: Date.now()
+            time: Date.now(),
+            filteredJourneys: undefined,
+            isSearchedByLoc: false,
+            isSearchedByDay: false,
+            isSearchedByTime: false
         }
     }
 
@@ -57,16 +61,136 @@ class Passengers extends Component {
     }
 
     onClickSearch = () => {
-        this.setState({
-            journeys: this.state.journeys.filter(j => {
-                if (this.state.searchBy === 'loc')
-                    return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
-                else if (this.state.searchBy === 'day')
-                    return j.jDate.substring(0, 3) === this.state.day
-                else if (this.state.searchBy === 'time')
-                    return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
-            })
-        })
+        // if (this.state.searchBy === 'loc' && this.state.isSearchedByLoc){
+        //     this.setState({ journeys:  })
+        // }
+        // const journeys = this.state.journeys;
+
+        // if (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime){
+        //     this.setState({
+        //         filteredJourneys: this.state.journeys.filter(j => {
+        //             if (this.state.searchBy === 'loc') {
+        //                 this.state.isSearchedByLoc = true;
+        //                 return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
+        //             }
+        //             else if (this.state.searchBy === 'day') {
+        //                 this.state.isSearchedByDay = true;
+        //                 return j.jDate.substring(0, 3) === this.state.day
+        //             }
+        //             else if (this.state.searchBy === 'time') {
+        //                 this.state.isSearchedByTime = true;
+        //                 return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
+        //             }
+        //         })
+        //     })
+        // } else {
+        //     this.setState({
+        //         filteredJourneys: this.state.journeys.filter(j => {
+        //             if (this.state.searchBy === 'loc' && this.state.isSearchedByLoc) {
+        //                 return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
+        //             }
+        //             else if (this.state.searchBy === 'day' && this.state.isSearchedByDay) {
+        //                 return j.jDate.substring(0, 3) === this.state.day
+        //             }
+        //             else if (this.state.searchBy === 'time' && this.state.isSearchedByTime) {
+        //                 return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
+        //             }
+        //         })
+        //     })
+        // }
+        if (this.state.searchBy === 'loc') { //when user tries to search by location
+
+            // if user has searched by location previously or if this is the 1st time searching is being done, filter all journeys
+            if (this.state.isSearchedByLoc || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
+                this.setState({
+                    filteredJourneys: this.state.journeys.filter(j => {
+                        return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
+                    })
+                })
+            // if user haven't searched by location previously but have searched by day or time filter previously filtered journeys
+            } else if (this.state.isSearchedByDay || this.state.isSearchedByTime) {
+                this.setState({
+                    filteredJourneys: this.state.filteredJourneys.filter(j => {
+                        return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
+                    })
+                })
+            }
+            this.setState({ isSearchedByLoc: true })
+
+        } else if (this.state.searchBy === 'day') { //when user tries to search by day
+
+            // if user has searched by day previously or if this is the 1st time searching is being done, filter all journeys
+            if (this.state.isSearchedByDay || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
+                this.setState({
+                    filteredJourneys: this.state.journeys.filter(j => {
+                        return j.jDate.substring(0, 3) === this.state.day
+                    })
+                })
+            // if user haven't searched by day previously but have searched by location or time filter previously filtered journeys
+            } else if (this.state.isSearchedByLoc|| this.state.isSearchedByTime) {
+                this.setState({
+                    filteredJourneys: this.state.filteredJourneys.filter(j => {
+                        return j.jDate.substring(0, 3) === this.state.day
+                    })
+                })
+            }
+            this.setState({ isSearchedByDay: true })
+
+        } else if (this.state.searchBy === 'time'){ //when user tries to search by time
+
+            // if user has searched by time previously or if this is the 1st time searching is being done, filter all journeys
+            if (this.state.isSearchedByTime || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
+                this.setState({
+                    filteredJourneys: this.state.journeys.filter(j => {
+                        return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
+                    })
+                })
+            // if user haven't searched by time previously but have searched by day or location filter previously filtered journeys
+            } else if (this.state.isSearchedByLoc|| this.state.isSearchedByDay) {
+                this.setState({
+                    filteredJourneys: this.state.filteredJourneys.filter(j => {
+                        return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
+                    })
+                })
+            }
+            this.setState({ isSearchedByTime: true })
+
+        }
+    }
+
+    Table = () => {
+        if (this.state.filteredJourneys !== undefined){ // searching has been done before
+            if (this.state.filteredJourneys.length !== 0){ // when there are 1 or more results
+                return (
+                    <div className="container">
+                        <h2 className="mt-4">{ this.state.filteredJourneys.length } passengers</h2>
+                        <table className="table table-bordered table-active mt-3">
+                            <thead>
+                            <tr>
+                                <th>Token ID</th>
+                                <th>Acc no</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.filteredJourneys.map(j => (
+                                    <tr key={ j._id }>
+                                        <td>{ j.tokenID }</td>
+                                        <td>{ j.accNo }</td>
+                                    </tr>
+                                ))
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            } else if (this.state.filteredJourneys.length === 0){ //when there are no results
+                return (<h2 className="container mt-4">No passengers</h2>)
+            }
+        }
+         else{ //when searching has not been done yet
+            return (<h2 className="container mt-4">Search to see results</h2>)
+        }
     }
 
     render() {
@@ -141,25 +265,7 @@ class Passengers extends Component {
                         </div>
                     </div>
                 </div>
-                <table className="table table-bordered table-active container mt-5">
-                    <thead>
-                    <tr>
-                        <th>Token ID</th>
-                        <th>Acc no</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.journeys.map(j => (
-                            <tr key={ j._id }>
-                                <td>{ j.tokenID }</td>
-                                <td>{ j.accNo }</td>
-                                {/*<td>{ j.jTime.substring(17, 21) }</td>*/}
-                            </tr>
-                        ))
-                    }
-                    </tbody>
-                </table>
+                <this.Table/>
             </div>
         );
     }
