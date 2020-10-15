@@ -20,6 +20,7 @@ class MakeJourney extends Component{
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            id: '',
             accNo: '',
             tokenID: '',
             startPoint: '',
@@ -34,6 +35,7 @@ class MakeJourney extends Component{
         }
 
     }
+
 
     onChangeUserAc(e){
         this.setState({
@@ -77,6 +79,22 @@ class MakeJourney extends Component{
         });
     }
 
+    componentDidMount() {
+
+        axios.get('http://localhost:5000/journey/getId')
+            .then(res => {
+                console.log(res.data.data);
+                this.setState({
+                    id: res.data.data
+                })
+
+            })
+            .catch(err =>
+                console.log(err)
+            )
+
+    }
+
     sweetalertfunction(){
         swal({
             title: "Journey details Added",
@@ -85,6 +103,7 @@ class MakeJourney extends Component{
             button: true,
         }).then(()=>{
             this.setState({
+                id: '',
                 accNo: '',
                 tokenID: '',
                 startPoint: '',
@@ -118,6 +137,7 @@ class MakeJourney extends Component{
         e.preventDefault();
 
         const journey = {
+            id: this.state.id,
             accNo: this.state.accNo,
             tokenID: this.state.tokenID,
             startPoint: this.state.startPoint,
@@ -200,6 +220,13 @@ class MakeJourney extends Component{
 
                 <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"#E8F8F5"}}>
                     <div className="form-group">
+                        <label>Journey Id: </label>
+                        <input type="text"
+                               className="form-control"
+                               value={this.state.id}
+                        />
+                    </div>
+                    <div className="form-group">
                         <label>Your Account Number: </label>
                         <input type="text"
                                className="form-control"
@@ -244,7 +271,7 @@ class MakeJourney extends Component{
                     </div>
                     <div className="form-group">
                         <label>Journey Date: </label>
-                        <input type="text"
+                        <input type="date"
                                className="form-control"
                                value={this.state.jDate}
                                onChange={this.onChangeDate}

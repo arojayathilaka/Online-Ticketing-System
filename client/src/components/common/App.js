@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import NavBar from "./components/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoginHome from "./login/LoginHome";
@@ -9,8 +8,10 @@ import ManagerLogin from "../managers/login/ManagerLogin";
 import Passengers from "../managers/statistics/Passengers";
 import Fares from "../managers/statistics/Fares";
 import Main from "../managers/statistics/Main";
-import MakeExpressJourney from "./components/makeExpressJourney/MakeExpressJourney";
-import MakeJourney from "./components/makeJourney/MakeJourney";
+import MakeExpressJourney from "../passengers/makeExpressJourney/MakeExpressJourney";
+import MakeJourney from "../passengers/makeJourney/MakeJourney";
+import LocalPassengersAddCredit from "../passengers/localPassengersAddCredit/LocalPassengersAddCredit";
+import foreignPassengersAddCredit from "../passengers/foreignPassengers/foreignPassengersAddCredit";
 
 class App extends Component  {
     render() {
@@ -26,9 +27,8 @@ class App extends Component  {
                         <Route path="/managers/fares" component={Fares} exact/>
                         <Route path="/expressWay" component={MakeExpressJourney} exact/>
                         <Route path="/normalWay" component={MakeJourney} exact/>
-                        <div>
-                            <NavBar/>
-                        </div>
+                        <Route path="/localPassengerAddCredit" component={LocalPassengersAddCredit} exact/>
+                        <Route path="/foreignPassengersAddCredit" component={foreignPassengersAddCredit} exact/>
                     </Switch>
                 </Router>
             </div>

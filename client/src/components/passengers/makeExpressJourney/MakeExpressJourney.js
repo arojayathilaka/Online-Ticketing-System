@@ -18,6 +18,7 @@ class MakeExpressJourney extends Component{
         this.sweetalertfunction = this.sweetalertfunction.bind(this);
 
         this.state = {
+            id: '',
             accNo: '',
             tokenID: '',
             expressWay: 'Kadawatha_Galle',
@@ -50,11 +51,6 @@ class MakeExpressJourney extends Component{
         });
     }
 
-    onChangeDistance(e){
-        this.setState({
-            distance: e.target.value
-        });
-    }
 
     onChangeDate(e){
         this.setState({
@@ -68,6 +64,22 @@ class MakeExpressJourney extends Component{
         });
     }
 
+    componentDidMount() {
+
+        axios.get('http://localhost:5000/express/getId')
+            .then(res => {
+                console.log(res.data.data);
+                this.setState({
+                    id: res.data.data
+                })
+
+            })
+            .catch(err =>
+                console.log(err)
+            )
+
+    }
+
     sweetalertfunction(){
         swal({
             title: "Journey details Added",
@@ -76,6 +88,7 @@ class MakeExpressJourney extends Component{
             button: true,
         }).then(()=>{
             this.setState({
+                id: '',
                 accNo: '',
                 tokenID: '',
                 expressWay: 'Kadawatha_Galle',
@@ -136,6 +149,7 @@ class MakeExpressJourney extends Component{
         e.preventDefault();
 
         const journeyExpress = {
+            id: this.state.id,
             accNo: this.state.accNo,
             tokenID: this.state.tokenID,
             expressWay: this.state.expressWay,
@@ -224,6 +238,13 @@ class MakeExpressJourney extends Component{
 
                 <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"#E8F8F5"}}>
                     <div className="form-group">
+                        <label>Journey Id: </label>
+                        <input type="text"
+                               className="form-control"
+                               value={this.state.id}
+                        />
+                    </div>
+                    <div className="form-group">
                         <label>Your Account Number: </label>
                         <input type="text"
                                className="form-control"
@@ -255,7 +276,7 @@ class MakeExpressJourney extends Component{
                     </div>
                     <div className="form-group">
                         <label>Journey Date: </label>
-                        <input type="text"
+                        <input type="date"
                                className="form-control"
                                value={this.state.jDate}
                                onChange={this.onChangeDate}
