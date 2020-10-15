@@ -2,14 +2,6 @@ import React, {Component} from 'react';
 import ManagersNavBar from "../ManagersNavBar";
 
 class Main extends Component {
-    constructor() {
-        super();
-    }
-
-    componentDidMount() {
-        console.log('hi')
-    }
-
     render() {
         return (
             <div>

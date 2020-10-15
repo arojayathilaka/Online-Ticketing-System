@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import ManagersNavBar from "../ManagersNavBar";
 import axios from 'axios';
 import './Passengers.css';
-import DatePicker from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker.css';
+import ReactToPrint from 'react-to-print';
+import PassengersTable from "./PassengersTable";
 
 class Passengers extends Component {
     constructor() {
@@ -12,7 +12,6 @@ class Passengers extends Component {
             journeys: [],
             expressJourneys: [],
             searchBy: 'loc',
-            time: Date.now(),
             filteredJourneys: undefined,
             isSearchedByLoc: false,
             isSearchedByDay: false,
@@ -26,7 +25,7 @@ class Passengers extends Component {
     }
 
     loadJourneys = () => {
-        axios.get('http://localhost:5000/journey')
+        axios.get('/journey')
             .then(res => {
                 this.setState({ journeys: res.data })
                 console.log(res.data);
@@ -35,7 +34,7 @@ class Passengers extends Component {
     }
 
     loadExpressJourneys = () =>{
-        axios.get('http://localhost:5000/express')
+        axios.get('/express')
             .then(res => {
                 this.setState({expressJourneys: res.data})
                 console.log(res.data);
@@ -47,9 +46,9 @@ class Passengers extends Component {
         this.setState({ searchBy: e.target.value })
     }
 
-    onChangeTime = time => {
-        console.log(time.toString().substring(16,21));
-        this.setState({ time: time })
+    onChangeTime = e => {
+        console.log(e.target.value);
+        this.setState({ time: e.target.value })
     }
 
     onChangeDay = e => {
@@ -61,58 +60,21 @@ class Passengers extends Component {
     }
 
     onClickSearch = () => {
-        // if (this.state.searchBy === 'loc' && this.state.isSearchedByLoc){
-        //     this.setState({ journeys:  })
-        // }
-        // const journeys = this.state.journeys;
-
-        // if (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime){
-        //     this.setState({
-        //         filteredJourneys: this.state.journeys.filter(j => {
-        //             if (this.state.searchBy === 'loc') {
-        //                 this.state.isSearchedByLoc = true;
-        //                 return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
-        //             }
-        //             else if (this.state.searchBy === 'day') {
-        //                 this.state.isSearchedByDay = true;
-        //                 return j.jDate.substring(0, 3) === this.state.day
-        //             }
-        //             else if (this.state.searchBy === 'time') {
-        //                 this.state.isSearchedByTime = true;
-        //                 return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
-        //             }
-        //         })
-        //     })
-        // } else {
-        //     this.setState({
-        //         filteredJourneys: this.state.journeys.filter(j => {
-        //             if (this.state.searchBy === 'loc' && this.state.isSearchedByLoc) {
-        //                 return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
-        //             }
-        //             else if (this.state.searchBy === 'day' && this.state.isSearchedByDay) {
-        //                 return j.jDate.substring(0, 3) === this.state.day
-        //             }
-        //             else if (this.state.searchBy === 'time' && this.state.isSearchedByTime) {
-        //                 return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
-        //             }
-        //         })
-        //     })
-        // }
         if (this.state.searchBy === 'loc') { //when user tries to search by location
 
             // if user has searched by location previously or if this is the 1st time searching is being done, filter all journeys
             if (this.state.isSearchedByLoc || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => {
-                        return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
-                    })
+                    filteredJourneys: this.state.journeys.filter(j =>
+                        j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
+                    )
                 })
             // if user haven't searched by location previously but have searched by day or time filter previously filtered journeys
             } else if (this.state.isSearchedByDay || this.state.isSearchedByTime) {
                 this.setState({
-                    filteredJourneys: this.state.filteredJourneys.filter(j => {
-                        return j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
-                    })
+                    filteredJourneys: this.state.filteredJourneys.filter(j =>
+                        j.startPoint.toLowerCase() === this.state.location.toLowerCase() || j.desPoint.toLowerCase() === this.state.location.toLowerCase()
+                    )
                 })
             }
             this.setState({ isSearchedByLoc: true })
@@ -122,16 +84,12 @@ class Passengers extends Component {
             // if user has searched by day previously or if this is the 1st time searching is being done, filter all journeys
             if (this.state.isSearchedByDay || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => {
-                        return j.jDate.substring(0, 3) === this.state.day
-                    })
+                    filteredJourneys: this.state.journeys.filter(j => j.jDate.substring(0, 3) === this.state.day)
                 })
             // if user haven't searched by day previously but have searched by location or time filter previously filtered journeys
             } else if (this.state.isSearchedByLoc|| this.state.isSearchedByTime) {
                 this.setState({
-                    filteredJourneys: this.state.filteredJourneys.filter(j => {
-                        return j.jDate.substring(0, 3) === this.state.day
-                    })
+                    filteredJourneys: this.state.filteredJourneys.filter(j => j.jDate.substring(0, 3) === this.state.day)
                 })
             }
             this.setState({ isSearchedByDay: true })
@@ -141,55 +99,16 @@ class Passengers extends Component {
             // if user has searched by time previously or if this is the 1st time searching is being done, filter all journeys
             if (this.state.isSearchedByTime || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => {
-                        return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
-                    })
+                    filteredJourneys: this.state.journeys.filter(j => j.jTime.substring(16, 21) === this.state.time)
                 })
             // if user haven't searched by time previously but have searched by day or location filter previously filtered journeys
             } else if (this.state.isSearchedByLoc|| this.state.isSearchedByDay) {
                 this.setState({
-                    filteredJourneys: this.state.filteredJourneys.filter(j => {
-                        return j.jTime.substring(16, 21) === this.state.time.toString().substring(16, 21)
-                    })
+                    filteredJourneys: this.state.filteredJourneys.filter(j => j.jTime.substring(16, 21) === this.state.time)
                 })
             }
             this.setState({ isSearchedByTime: true })
 
-        }
-    }
-
-    Table = () => {
-        if (this.state.filteredJourneys !== undefined){ // searching has been done before
-            if (this.state.filteredJourneys.length !== 0){ // when there are 1 or more results
-                return (
-                    <div className="container">
-                        <h2 className="mt-4">{ this.state.filteredJourneys.length } passengers</h2>
-                        <table className="table table-bordered table-active mt-3">
-                            <thead>
-                            <tr>
-                                <th>Token ID</th>
-                                <th>Acc no</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.filteredJourneys.map(j => (
-                                    <tr key={ j._id }>
-                                        <td>{ j.tokenID }</td>
-                                        <td>{ j.accNo }</td>
-                                    </tr>
-                                ))
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-                )
-            } else if (this.state.filteredJourneys.length === 0){ //when there are no results
-                return (<h2 className="container mt-4">No passengers</h2>)
-            }
-        }
-         else{ //when searching has not been done yet
-            return (<h2 className="container mt-4">Search to see results</h2>)
         }
     }
 
@@ -217,15 +136,11 @@ class Passengers extends Component {
                         <div className="col-3">
                             <input
                                 type="text"
-                                className={
-                                    this.state.searchBy === 'loc' ? "form-control show" : "hide"
-                                }
+                                className={this.state.searchBy === 'loc' ? "form-control show" : "hide"}
                                 onChange={this.onChangeLocation}
                             />
                             <select
-                                className={
-                                    this.state.searchBy === 'day' ? "form-control show" : "hide"
-                                }
+                                className={this.state.searchBy === 'day' ? "form-control show" : "hide"}
                                 onChange={this.onChangeDay}>
                                 <option value="Mon">Monday</option>
                                 <option value="Tue">Tuesday</option>
@@ -235,16 +150,9 @@ class Passengers extends Component {
                                 <option value="Sat">Saturday</option>
                                 <option value="Sun">Sunday</option>
                             </select>
-                            <DatePicker
-                                className={
-                                    this.state.searchBy === 'time' ? "form-control show" : "hide"
-                                }
-                                selected={this.state.time}
-                                showTimeSelect
-                                showTimeSelectOnly
-                                timeIntervals={15}
-                                timeCaption="Time"
-                                dateFormat="h:mm aa"
+                            <input
+                                type="time"
+                                className={this.state.searchBy === 'time' ? "form-control show" : "hide"}
                                 onChange={this.onChangeTime}
                             />
                         </div>
@@ -265,7 +173,18 @@ class Passengers extends Component {
                         </div>
                     </div>
                 </div>
-                <this.Table/>
+                {this.state.filteredJourneys !== undefined ? // check whether searching has not been done yet
+                    this.state.filteredJourneys.length !== 0 ? // check whether no results found
+                        <div className="container">
+                            <PassengersTable journeys={this.state.filteredJourneys} ref={el => this.componentRef = el} />
+                            <ReactToPrint
+                                trigger={() => {return <button className="btn btn-primary">Generate Report</button>}}
+                                content={() => this.componentRef}
+                                pageStyle
+                            />
+                        </div>
+                    : <h2 className="container mt-4">No passengers</h2>
+                : <h2 className="container mt-4">Search to see results</h2>}
             </div>
         );
     }
