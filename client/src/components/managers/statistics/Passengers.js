@@ -107,7 +107,7 @@ class Passengers extends Component {
             <div>
                 <ManagersNavBar/>
                 <div className="passenger-header">
-                    <h5 className="mt-1 mb-5">Passenger Statistics</h5>
+                    <h4 className="mt-1 mb-5">Passenger Statistics</h4>
                     <div className="row">
                         <div className="col-3">
                             <div className="row">
@@ -148,15 +148,13 @@ class Passengers extends Component {
                             />
                         </div>
                         <div className="col-3 my-2">
-                            <div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" defaultChecked/>
-                                    <label className="form-check-label" htmlFor="inlineRadio1">Normal Journeys</label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" defaultValue="option2" />
-                                    <label className="form-check-label" htmlFor="inlineRadio2">Expressway Journeys</label>
-                                </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" defaultChecked/>
+                                <label className="form-check-label" htmlFor="inlineRadio1">Normal Journeys</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" defaultValue="option2" />
+                                <label className="form-check-label" htmlFor="inlineRadio2">Expressway Journeys</label>
                             </div>
                         </div>
                         <div className="col-3">

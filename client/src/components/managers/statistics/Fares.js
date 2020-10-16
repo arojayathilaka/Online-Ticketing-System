@@ -40,15 +40,15 @@ class Fares extends Component {
                     <div className="row">
                         <div className="col-3">
                             <div className="row">
-                                <div className="col">
-                                    <label>Search By Date</label>
+                                <div className="col my-2">
+                                    <label>Search By Date:</label>
                                 </div>
                             </div>
                         </div>
                         <div className="col-3">
                             <input type="text" className="form-control"/>
                         </div>
-                        <div className="col-3">
+                        <div className="col-3 my-2">
                             <div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" defaultChecked/>
@@ -82,7 +82,7 @@ class Fares extends Component {
                         <tr key={journey._id}>
                             <td>{journey.accNo}</td>
                             <td>{journey.tokenID}</td>
-                            <td>{journey.jDate}</td>
+                            <td>{journey.jDate.substring(0,10)}</td>
                             <td>{journey.fare}</td>
                         </tr>
                     ))}

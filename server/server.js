@@ -12,6 +12,7 @@ const creditsRouter = require('./routes/credits.route');
 const journeyDetailsForVariableFareRouter = require('./routes/journeyDetailsForVariableFare.route');
 const journeyDetailsForFixedFareRouter = require('./routes/journeyDetailsForFixedFare.route')
 const inspectionRouter = require('./routes/inspection.route');
+const digitalTokenRouter = require('./routes/digitalToken.route')
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use('/credit', creditsRouter);
 app.use('/journeyDetailsForVariableFare', journeyDetailsForVariableFareRouter);
 app.use('/journeyDetailsForFixedFare', journeyDetailsForFixedFareRouter);
 app.use('/inspections', inspectionRouter);
+app.use('/tokens', digitalTokenRouter);
 
 const port = process.env.PORT || 5000;
 
