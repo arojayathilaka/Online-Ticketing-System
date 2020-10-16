@@ -4,7 +4,12 @@
     text-align: center;
 }
 
-/*select{*/
-/*    !*min-width: 50px;*!*/
-/*    max-width: 200px;*/
-/*}*/
+.hide {
+    display:none;
+    visibility:hidden;
+}
+
+.show {
+    display:inline;
+    visibility:visible;
+}

@@ -12,6 +12,12 @@ import JourneyDetailsForVariableFare from "../journeyDetails/JourneyDetailsForVa
 import JourneyDetailsForFixedFare from "../journeyDetails/JourneyDetailsForFixedFare";
 import Inspections from "../inspections/Inspections";
 
+import MakeExpressJourney from "../passengers/makeExpressJourney/MakeExpressJourney";
+import MakeJourney from "../passengers/makeJourney/MakeJourney";
+import LocalPassengersAddCredit from "../passengers/localPassengersAddCredit/LocalPassengersAddCredit";
+import foreignPassengersAddCredit from "../passengers/foreignPassengers/foreignPassengersAddCredit";
+
+
 class App extends Component  {
     render() {
         return(
@@ -27,6 +33,10 @@ class App extends Component  {
                         <Route path="/managers/main" component={Main} exact/>
                         <Route path="/managers/passengers" component={Passengers} exact/>
                         <Route path="/managers/fares" component={Fares} exact/>
+                        <Route path="/expressWay" component={MakeExpressJourney} exact/>
+                        <Route path="/normalWay" component={MakeJourney} exact/>
+                        <Route path="/localPassengerAddCredit" component={LocalPassengersAddCredit} exact/>
+                        <Route path="/foreignPassengersAddCredit" component={foreignPassengersAddCredit} exact/>
                     </Switch>
                 </Router>
             </div>

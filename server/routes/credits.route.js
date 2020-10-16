@@ -15,15 +15,13 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
 
     const tokenType = req.body.tokenType;
-    const acNo = req.body.acNo;
-    const currentBalance = Number(req.body.currentBalance);
+    const accNo = req.body.accNo;
     const credits = Number(req.body.credits);
-    const paymentMethod = req.body.paymentMethod;
 
 
     console.log(req.body);
 
-    const newCredits = new Credit({ tokenType, acNo, currentBalance, credits, paymentMethod });
+    const newCredits = new Credit({ tokenType, accNo, credits });
     newCredits.save()
         .then(() => res.send({message: 'Credit Added!'}))
         .catch(err =>

@@ -17,12 +17,12 @@ class ManagerLogin extends Component {
     }
 
     loadAccounts = () => {
-        axios.get('http://localhost:5000/managers')
+        axios.get('/managers')
             .then(managers => {
                 this.setState({
                     managers: managers.data
                 })
-                console.log(this.state.managers)
+
             })
             .catch(err =>
                 console.log(err)
