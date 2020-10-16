@@ -14,6 +14,7 @@ import MakeExpressJourney from "../passengers/makeExpressJourney/MakeExpressJour
 import MakeJourney from "../passengers/makeJourney/MakeJourney";
 import LocalPassengersAddCredit from "../passengers/localPassengersAddCredit/LocalPassengersAddCredit";
 import foreignPassengersAddCredit from "../passengers/foreignPassengers/foreignPassengersAddCredit";
+import AllFares from "../managers/statistics/AllFares"
 
 
 class App extends Component  {
@@ -34,6 +35,7 @@ class App extends Component  {
                         <Route path="/normalWay" component={MakeJourney} exact/>
                         <Route path="/localPassengerAddCredit" component={LocalPassengersAddCredit} exact/>
                         <Route path="/foreignPassengersAddCredit" component={foreignPassengersAddCredit} exact/>
+                        <Route path="/allFares" component={AllFares} exact/>
                     </Switch>
                 </Router>
             </div>
