@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import './LoginHome.css'
 
 class LoginHome extends Component {
-    constructor() {
-        super();
-    }
 
     onClickPassengerLogin = () => {
         window.location = '/passengerLogin'

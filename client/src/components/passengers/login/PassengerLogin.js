@@ -17,7 +17,7 @@ class PassengerLogin extends Component {
     }
 
     loadAccounts = () => {
-        axios.get('http://localhost:5000/accounts')
+        axios.get('/accounts')
             .then(accounts => {
                 this.setState({
                     accounts: accounts.data

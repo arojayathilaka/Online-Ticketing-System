@@ -4,18 +4,12 @@
     text-align: center;
 }
 
-/*select{*/
-/*    !*min-width: 50px;*!*/
-/*    max-width: 200px;*/
-/*}*/
-
-.hide
-{
+.hide {
     display:none;
     visibility:hidden;
 }
-.show
-{
+
+.show {
     display:inline;
     visibility:visible;
 }
