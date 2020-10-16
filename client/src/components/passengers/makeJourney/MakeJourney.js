@@ -75,9 +75,9 @@ class MakeJourney extends Component{
         });
     }
 
-    onChangeTime(e){
+    onChangeTime(time){
         this.setState({
-            jTime: e.target.value
+            jTime: time
         });
     }
 
@@ -195,6 +195,7 @@ class MakeJourney extends Component{
                 console.log(error);
             });
 
+
         axios.post('http://localhost:5000/journey/add', journey)
             .then(res => {
                 if (res.status === 200) {
@@ -282,9 +283,13 @@ class MakeJourney extends Component{
                         </div>
                         <div className="form-group">
                             <label>Journey Time: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.jTime}
+                            <DatePicker
+                                   selected={this.state.jTime}
+                                   showTimeSelect
+                                   showTimeSelectOnly
+                                   timeIntervals={15}
+                                   timeCaption="Time"
+                                   dateFormat="h:mm aa"
                                    onChange={this.onChangeTime}
                             />
                         </div>

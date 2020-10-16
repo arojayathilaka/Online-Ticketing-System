@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
 import './MakeExpressJourney.css';
+import DatePicker from "react-datepicker";
 
 
 class MakeExpressJourney extends Component{
@@ -53,15 +54,15 @@ class MakeExpressJourney extends Component{
     }
 
 
-    onChangeDate(e){
+    onChangeDate(date){
         this.setState({
-            jDate: e.target.value
+            jDate: date
         });
     }
 
-    onChangeTime(e){
+    onChangeTime(time){
         this.setState({
-            jTime: e.target.value
+            jTime: time
         });
     }
 
@@ -279,18 +280,21 @@ class MakeExpressJourney extends Component{
                         </div>
                         <div className="form-group">
                             <label>Journey Date: </label>
-                            <input type="date"
-                                   className="form-control"
-                                   value={this.state.jDate}
+                            <DatePicker
+                                   selected={this.state.jDate}
                                    onChange={this.onChangeDate}
                             />
                         </div>
                         <div className="form-group">
                             <label>Journey Time: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.jTime}
-                                   onChange={this.onChangeTime}
+                            <DatePicker
+                                selected={this.state.jTime}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={15}
+                                timeCaption="Time"
+                                dateFormat="h:mm aa"
+                                onChange={this.onChangeTime}
                             />
                         </div>
                         <div className="form-group">
