@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
+import './LocalPassengersAddCredit.css';
 
 class LocalPassengersAddCredit extends Component{
 
@@ -165,72 +166,77 @@ class LocalPassengersAddCredit extends Component{
     render() {
         const {tokenType} = this.state;
         return(
-            <div className="container">
-                <h3 style={{color: "#4A235A"}}>Add Your Credits</h3>
+            <div className="image-bg-p">
 
-                <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"#E8F8F5"}}>
-                    <div className="form-group">
-                        <label>Select Token Type: </label>
-                    </div>
-                    <div className="form-group">
-                        <label style={{marginRight: "103px"}}>Smart Card</label>
-                        <input type="radio"
-                               //className="form-control"
-                               value="smart_card"
-                               checked={tokenType === "smart_card"}
-                               onChange={this.onChangeTokenType}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label style={{marginRight: "140px"}}>Ticket</label>
-                        <input type="radio"
-                               //className="form-control"
-                               value="ticket"
-                               checked={tokenType === "ticket"}
-                               onChange={this.onChangeTokenType}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label style={{marginRight: "29px"}}>Digital in your mobile</label>
-                        <input type="radio"
-                               //className="form-control"
-                               value="mobile"
-                               checked={tokenType === "mobile"}
-                               onChange={this.onChangeTokenType}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Your Account Number: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.accNo}
-                               onChange={this.onChangeUserAc}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button onClick={this.search}>Display Current Balance</button>
-                    </div>
-                    <div className="form-group">
-                        <label>Current Balance: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.currentBalance}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Credit you want to add: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.credits}
-                               onChange={this.onChangeCredit}
-                        />
-                    </div>
+                <div className="container">
+                    <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Credits (Foreign Passenger)</h3>
 
-                    <div className="form-group">
-                        <input type="submit" value="Add Credit" style={{ color:"#fff",backgroundColor:"#0097A7"}} className="btn"/>
-                    </div>
-                </form>
+                    <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"rgba(226, 223, 223, 0.65)",marginTop: "50px"}}>
+                        <div className="form-group">
+                            <label>Select Token Type: </label>
+                        </div>
+                        <div className="form-group">
+                            <label style={{marginRight: "103px"}}>Smart Card</label>
+                            <input type="radio"
+                                //className="form-control"
+                                   value="smart_card"
+                                   checked={tokenType === "smart_card"}
+                                   onChange={this.onChangeTokenType}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label style={{marginRight: "140px"}}>Ticket</label>
+                            <input type="radio"
+                                //className="form-control"
+                                   value="ticket"
+                                   checked={tokenType === "ticket"}
+                                   onChange={this.onChangeTokenType}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label style={{marginRight: "29px"}}>Digital in your mobile</label>
+                            <input type="radio"
+                                //className="form-control"
+                                   value="mobile"
+                                   checked={tokenType === "mobile"}
+                                   onChange={this.onChangeTokenType}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Your Account Number: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.accNo}
+                                   onChange={this.onChangeUserAc}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <button onClick={this.search} style={{ color:"#fff",backgroundColor:"#000"}} className="btn">Display Current Balance</button>
+                        </div>
+                        <div className="form-group">
+                            <label>Current Balance: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.currentBalance}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Credit you want to add: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.credits}
+                                   onChange={this.onChangeCredit}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <input type="submit" value="Add Credit" style={{ color:"#fff",backgroundColor:"#000"}} className="btn"/>
+                        </div>
+                    </form>
+                </div>
+
             </div>
+
         );
     }
 

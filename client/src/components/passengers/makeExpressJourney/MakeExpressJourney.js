@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
+import './MakeExpressJourney.css';
 
 
 class MakeExpressJourney extends Component{
@@ -233,86 +234,91 @@ class MakeExpressJourney extends Component{
 
     render() {
         return(
-            <div className="container">
-                <h3 style={{color: "#4A235A"}}>Add Your Journey Details</h3>
+            <div className="image-bg-p">
 
-                <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"#E8F8F5"}}>
-                    <div className="form-group">
-                        <label>Journey Id: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.id}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Your Account Number: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.accNo}
-                               onChange={this.onChangeUserAc}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Your Token ID: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.tokenID}
-                               onChange={this.onChangeTokenId}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Express Way: </label>
-                        <select value={this.state.expressWay} onChange={this.onChangeExpressWay}>
-                            <option selected value="Kadawatha_Galle">Kadawatha - Galle</option>
-                            <option value="Kadawatha_Mathara">Kadawatha - Mathara</option>
-                            <option value="Kadawatha_Hambanthota">Kadawatha - Hambanthota</option>
-                            <option value="Katunayaka_Mathara">Katunayaka - Mathara</option>
-                            <option value="Katunayaka_Colombo">Katunayaka - Colombo</option>
-                            <option value="Kottawa_Mathara">Kottawa - Mathara</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label>Applied Fare: Fixed</label>
-                    </div>
-                    <div className="form-group">
-                        <label>Journey Date: </label>
-                        <input type="date"
-                               className="form-control"
-                               value={this.state.jDate}
-                               onChange={this.onChangeDate}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Journey Time: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.jTime}
-                               onChange={this.onChangeTime}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button onClick={this.calculateTotalBill}>Calculate Fare</button>
-                    </div>
-                    <div className="form-group">
-                        <label>Distance: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.distance}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Your Journey Fare: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.fare}
-                        />
-                    </div>
+                <div className="container">
+                    <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Journey Details</h3>
 
-                    <div className="form-group">
-                        <input type="submit" value="Add Journey" style={{ color:"#fff",backgroundColor:"#0097A7"}} className="btn"/>
-                    </div>
-                </form>
+                    <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"rgba(226, 223, 223, 0.65)",marginTop: "50px"}}>
+                        <div className="form-group">
+                            <label>Journey Id: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.id}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Your Account Number: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.accNo}
+                                   onChange={this.onChangeUserAc}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Your Token ID: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.tokenID}
+                                   onChange={this.onChangeTokenId}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Express Way: </label>
+                            <select value={this.state.expressWay} onChange={this.onChangeExpressWay}>
+                                <option selected value="Kadawatha_Galle">Kadawatha - Galle</option>
+                                <option value="Kadawatha_Mathara">Kadawatha - Mathara</option>
+                                <option value="Kadawatha_Hambanthota">Kadawatha - Hambanthota</option>
+                                <option value="Katunayaka_Mathara">Katunayaka - Mathara</option>
+                                <option value="Katunayaka_Colombo">Katunayaka - Colombo</option>
+                                <option value="Kottawa_Mathara">Kottawa - Mathara</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Applied Fare: Fixed</label>
+                        </div>
+                        <div className="form-group">
+                            <label>Journey Date: </label>
+                            <input type="date"
+                                   className="form-control"
+                                   value={this.state.jDate}
+                                   onChange={this.onChangeDate}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Journey Time: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.jTime}
+                                   onChange={this.onChangeTime}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <button onClick={this.calculateTotalBill} style={{ color:"#fff",backgroundColor:"#000"}} className="btn">Calculate Fare</button>
+                        </div>
+                        <div className="form-group">
+                            <label>Distance: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.distance}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Your Journey Fare: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.fare}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <input type="submit" value="Add Journey" style={{ color:"#fff",backgroundColor:"#000"}} className="btn"/>
+                        </div>
+                    </form>
+                </div>
+
             </div>
+
 
         );
     }
