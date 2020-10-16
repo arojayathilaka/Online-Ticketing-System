@@ -9,7 +9,9 @@ const managersRouter = require('./routes/publicTransportManager.route');
 const journeyRouter = require('./routes/makeJourney.route');
 const expressJourneyRouter = require('./routes/makeJourneyExpress.route');
 const creditsRouter = require('./routes/credits.route');
-const journeyDetailsRouter = require('./routes/journeyDetails.route');
+const journeyDetailsForVariableFareRouter = require('./routes/journeyDetailsForVariableFare.route');
+const journeyDetailsForFixedFareRouter = require('./routes/journeyDetailsForFixedFare.route')
+const inspectionRouter = require('./routes/inspection.route');
 
 const app = express();
 
@@ -46,7 +48,9 @@ app.use('/managers', managersRouter);
 app.use('/journey', journeyRouter);
 app.use('/express', expressJourneyRouter);
 app.use('/credit', creditsRouter);
-app.use('/journeyDetails', journeyDetailsRouter);
+app.use('/journeyDetailsForVariableFare', journeyDetailsForVariableFareRouter);
+app.use('/journeyDetailsForFixedFare', journeyDetailsForFixedFareRouter);
+app.use('/inspections', inspectionRouter);
 
 const port = process.env.PORT || 5000;
 
