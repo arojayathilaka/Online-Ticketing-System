@@ -7,11 +7,9 @@ import PassengerLogin from "../passengers/login/PassengerLogin";
 import ManagerLogin from "../managers/login/ManagerLogin";
 import Passengers from "../managers/statistics/Passengers";
 import Fares from "../managers/statistics/Fares";
-import Main from "../managers/statistics/Main";
 import JourneyDetailsForVariableFare from "../journeyDetails/JourneyDetailsForVariableFare";
 import JourneyDetailsForFixedFare from "../journeyDetails/JourneyDetailsForFixedFare";
 import Inspections from "../inspections/Inspections";
-
 import MakeExpressJourney from "../passengers/makeExpressJourney/MakeExpressJourney";
 import MakeJourney from "../passengers/makeJourney/MakeJourney";
 import LocalPassengersAddCredit from "../passengers/localPassengersAddCredit/LocalPassengersAddCredit";
@@ -33,9 +31,8 @@ class App extends Component  {
                         <Route path="/journeyDetails/normalJourney" component={JourneyDetailsForVariableFare} exact/>
                         <Route path="/journeyDetails/expressJourney" component={JourneyDetailsForFixedFare} exact/>
                         <Route path="/inspectionReports" component={Inspections} exact/>
-                        <Route path="/managers/main" component={Main} exact/>
-                        <Route path="/managers/passengers" component={Passengers} exact/>
-                        <Route path="/managers/fares" component={Fares} exact/>
+                        <Route path="/managers/passenger-stats" component={Passengers} exact/>
+                        <Route path="/managers/fare-stats" component={Fares} exact/>
                         <Route path="/expressWay" component={MakeExpressJourney} exact/>
                         <Route path="/normalWay" component={MakeJourney} exact/>
                         <Route path="/localPassengerAddCredit" component={LocalPassengersAddCredit} exact/>
