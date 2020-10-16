@@ -75,12 +75,12 @@ class Passengers extends Component {
             // if user has searched by day previously or if this is the 1st time searching is being done, filter all journeys
             if (this.state.isSearchedByDay || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => j.jDate.substring(0, 3) === this.state.day)
+                    filteredJourneys: this.state.journeys.filter(j => new Date(j.jDate).getDay().toString() === this.state.day)
                 })
             // if user haven't searched by day previously but have searched by location or time filter previously filtered journeys
-            } else if (this.state.isSearchedByLoc|| this.state.isSearchedByTime) {
+            } else if (this.state.isSearchedByLoc || this.state.isSearchedByTime) {
                 this.setState({
-                    filteredJourneys: this.state.filteredJourneys.filter(j => j.jDate.substring(0, 3) === this.state.day)
+                    filteredJourneys: this.state.journeys.filter(j => new Date(j.jDate).getDay().toString() === this.state.day)
                 })
             }
             this.setState({ isSearchedByDay: true })
@@ -132,14 +132,14 @@ class Passengers extends Component {
                             <select
                                 className={this.state.searchBy === 'day' ? "form-control show" : "hide"}
                                 onChange={this.onChangeDay}>
-                                <option selected>Choose...</option>
-                                <option value="Mon">Monday</option>
-                                <option value="Tue">Tuesday</option>
-                                <option value="Wed">Wednesday</option>
-                                <option value="Thu">Thursday</option>
-                                <option value="Fri">Friday</option>
-                                <option value="Sat">Saturday</option>
-                                <option value="Sun">Sunday</option>
+                                <option defaultValue>Choose...</option>
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                                <option value="0">Sunday</option>
                             </select>
                             <input
                                 type="time"

@@ -13,24 +13,24 @@ class LoginHome extends Component {
 
     render() {
         return (
-            <div className="image-bg-home">
-                <div className="btn-bg">
-                    <button
-                        className="login-home-btn"
-                        style={{ top: "40%" }}
-                        onClick={this.onClickPassengerLogin}
-                    >
-                        Passenger Login
-                    </button>
-                    <button
-                        className="login-home-btn"
-                        style={{ top: "60%" }}
-                        onClick={this.onClickManagerLogin}
-                    >
-                        Public Transport Manager Login
-                    </button>
+                <div className="image-bg-home">
+                    <div className="btn-bg">
+                        <button
+                            className="login-home-btn"
+                            style={{ top: "40%" }}
+                            onClick={this.onClickPassengerLogin}
+                        >
+                            Passenger Login
+                        </button>
+                        <button
+                            className="login-home-btn"
+                            style={{ top: "60%" }}
+                            onClick={this.onClickManagerLogin}
+                        >
+                            Public Transport Manager Login
+                        </button>
+                    </div>
                 </div>
-            </div>
         );
     }
 }
