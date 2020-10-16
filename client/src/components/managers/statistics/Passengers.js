@@ -33,7 +33,7 @@ class Passengers extends Component {
             .catch(err => console.log(err))
     }
 
-    loadExpressJourneys = () =>{
+    loadExpressJourneys = () => {
         axios.get('/express')
             .then(res => {
                 this.setState({expressJourneys: res.data})
@@ -132,6 +132,7 @@ class Passengers extends Component {
                             <select
                                 className={this.state.searchBy === 'day' ? "form-control show" : "hide"}
                                 onChange={this.onChangeDay}>
+                                <option selected>Choose...</option>
                                 <option value="Mon">Monday</option>
                                 <option value="Tue">Tuesday</option>
                                 <option value="Wed">Wednesday</option>
@@ -159,7 +160,7 @@ class Passengers extends Component {
                             </div>
                         </div>
                         <div className="col-3">
-                            <button className="btn btn-primary" onClick={this.onClickSearch}>Search</button>
+                            <button className="btn btn-primary" onClick={this.onClickSearch} disabled={!this.state.day && !this.state.time && !this.state.location}>Search</button>
                         </div>
                     </div>
                 </div>
