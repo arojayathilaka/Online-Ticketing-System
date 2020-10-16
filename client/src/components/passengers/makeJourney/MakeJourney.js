@@ -116,6 +116,7 @@ class MakeJourney extends Component{
                 jTime: '',
                 fare: 0
             });
+            window.location = '/passengerJourneyType'
         });
     }
 
@@ -200,6 +201,7 @@ class MakeJourney extends Component{
             .then(res => {
                 if (res.status === 200) {
                     this.sweetalertfunction();
+
                 }
                 else {
                     swal({

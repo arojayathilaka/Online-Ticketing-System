@@ -100,6 +100,7 @@ class MakeExpressJourney extends Component{
                 jTime: '',
                 fare: 0
             });
+            window.location = '/passengerJourneyType'
         });
     }
 
