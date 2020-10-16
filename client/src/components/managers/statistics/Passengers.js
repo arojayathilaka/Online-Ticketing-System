@@ -42,22 +42,13 @@ class Passengers extends Component {
             .catch(err => console.log(err))
     }
 
-    onChangeSearchBy = e => {
-        this.setState({ searchBy: e.target.value })
-    }
+    onChangeSearchBy = e => this.setState({ searchBy: e.target.value })
 
-    onChangeTime = e => {
-        console.log(e.target.value);
-        this.setState({ time: e.target.value })
-    }
+    onChangeTime = e => this.setState({ time: e.target.value })
 
-    onChangeDay = e => {
-        this.setState({ day: e.target.value })
-    }
+    onChangeDay = e => this.setState({ day: e.target.value })
 
-    onChangeLocation = e => {
-        this.setState({ location: e.target.value })
-    }
+    onChangeLocation = e => this.setState({ location: e.target.value })
 
     onClickSearch = () => {
         if (this.state.searchBy === 'loc') { //when user tries to search by location
@@ -108,7 +99,6 @@ class Passengers extends Component {
                 })
             }
             this.setState({ isSearchedByTime: true })
-
         }
     }
 
