@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ManagersNavBar from "../ManagersNavBar";
 import axios from 'axios';
-import './Fares.css';
 import "react-datepicker/dist/react-datepicker.css"
+import './AllFares.css'
 
 class Fares extends Component {
     constructor() {
@@ -34,9 +34,9 @@ class Fares extends Component {
 
     render() {
         return (
-            <div>
+            <div className="image-bg-ps">
                 <ManagersNavBar/>
-                <div className="fare-header">
+                <div className="all-fares-header">
                     <br/>
                     <h1 className="mt-1 mb-5">Fare Statistics</h1>
                     <div className="row">
@@ -47,7 +47,7 @@ class Fares extends Component {
                     </div>
                 </div>
                 <br/>
-                <h3 className="mt-1 mb-5" align="center">Normal Journey Fare Statistics Table</h3>
+                <h3 className="mt-1 mb-5 text-light" align="center">Normal Journey Fare Statistics Table</h3>
                 <div className="container">
                     <table className="table table-dark table-hover">
                         <thead>
@@ -72,7 +72,7 @@ class Fares extends Component {
                 </div>
                 <br/>
                 <hr/>
-                <h3 className="mt-1 mb-5" align="center">Expressway Fare Statistics Table</h3>
+                <h3 className="mt-1 mb-5 text-light" align="center">Expressway Fare Statistics Table</h3>
                 <div className="container">
                     <table className="table table-dark table-hover">
                         <thead>
