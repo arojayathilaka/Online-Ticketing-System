@@ -23,6 +23,9 @@ class PassengersNavBar extends Component {
                         <li className="nav-item">
                             <a className="nav-link" href="/localPassengerAddCredit">Add Credits</a>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/journeyDetails/normalJourney">My Journeys</a>
+                        </li>
                     </ul>
                     {/*<ul className="navbar-nav my-2 my-lg-0">*/}
                     {/*    <li className="nav-item">*/}
