@@ -4,8 +4,7 @@ class InspectionsTable extends Component {
     render() {
         return (
             <div className="container">
-
-
+                <h2 className="mt-4">{ this.props.inspections.length } Inspections Found</h2>
                 <table className="table table-dark table-hover">
                     <thead>
                     <tr>
@@ -16,19 +15,16 @@ class InspectionsTable extends Component {
                     </tr>
                     </thead>
                     <tbody style={{backgroundColor: "#A09D9C"}}>
-
-                    {this.state.inspections.map(inspection => (
+                    {this.props.inspections.map(inspection => (
                         <tr key={inspection._id}>
                             <td>{inspection.tokenId}</td>
                             <td>{inspection.status}</td>
                             <td>{inspection.inspectorId}</td>
-                            <td>{inspection.date.substring(0, 10)}</td>
+                            <td>{inspection.date.substring(0,10)}</td>
                         </tr>
                     ))}
-
                     </tbody>
                 </table>
-
             </div>
         )
     }
