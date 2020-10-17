@@ -39,7 +39,7 @@ class App extends Component  {
                         <Route path="/foreignPassengersAddCredit" component={foreignPassengersAddCredit} exact/>
                         <Route path="/allFares" component={AllFares} exact/>
                         <Route path="/passengerJourneyType" component={PassengerJourneyType} exact/>
-                        <Route path="./passengerActivityType" component={PassengerActivityType} exact/>
+                        <Route path="/activityPassenger" component={PassengerActivityType} exact/>
                     </Switch>
                 </Router>
             </div>

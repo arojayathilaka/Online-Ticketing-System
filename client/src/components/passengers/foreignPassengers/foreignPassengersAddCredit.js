@@ -57,6 +57,7 @@ class foreignPassengersAddCredit extends Component{
                 credits: 0,
                 currentBalance: 0
             });
+            window.location = '/activityPassenger'
         });
     }
 
@@ -160,13 +161,21 @@ class foreignPassengersAddCredit extends Component{
 
     }
 
+    onClickLocalAddCredit = () => {
+        window.location = '/localPassengerAddCredit'
+    }
+
     render() {
         const {tokenType} = this.state;
         return(
             <div className="image-bg-p">
+                <div style={{width: "100%", height: "50%",backgroundColor: "#000"}}>
+                    <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" onClick={this.onClickLocalAddCredit}>Local Passenger</button>
+                    <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" disabled={true}>Foreign Passenger</button>
+                </div>
 
                 <div className="container">
-                    <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Credits</h3>
+                    <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Credits (Foreign Passenger)</h3>
 
                     <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"rgba(226, 223, 223, 0.65)",marginTop: "50px"}}>
                         <div className="form-group">

@@ -9,8 +9,8 @@ class PassengerActivityType extends Component{
         window.location = '/localPassengerAddCredit'
     }
 
-    onClickForeignAddCredit = () => {
-        window.location = '/foreignPassengersAddCredit'
+    onClickPassengerJourneyType = () => {
+        window.location = '/passengerJourneyType'
     }
 
     render() {
@@ -23,14 +23,14 @@ class PassengerActivityType extends Component{
                         style={{ top: "40%" }}
                         onClick={this.onClickLocalAddCredit}
                     >
-                        Normal Journeys
+                        Add Credits to your Account
                     </button>
                     <button
                         className="login-home-btn"
                         style={{ top: "60%" }}
-                        onClick={this.onClickForeignAddCredit}
+                        onClick={this.onClickPassengerJourneyType}
                     >
-                        Express Way Journeys
+                        Make a Journey
                     </button>
                 </div>
             </div>

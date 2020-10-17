@@ -18,6 +18,7 @@ class MakeExpressJourney extends Component{
         this.calculateTotalBill = this.calculateTotalBill.bind(this);
         //this.onSubmit = this.onSubmit.bind(this);
         this.sweetalertfunction = this.sweetalertfunction.bind(this);
+        this.getTokenId = this.getTokenId.bind(this);
 
         this.state = {
             id: '',
@@ -147,6 +148,30 @@ class MakeExpressJourney extends Component{
 
     }
 
+    getTokenId(e){
+
+        e.preventDefault();
+
+        axios.get('http://localhost:5000/tokens/')
+            .then(response =>{
+                console.log(response);
+                this.setState({tokenDetails: response.data})
+                for (var i = 0;i < this.state.tokenDetails.length;i++){
+                    if (this.state.tokenDetails[i].accNo === this.state.accNo){
+                        this.setState({
+                            tokenID: this.state.tokenDetails[i].tokenID
+                        })
+                    }
+
+                }
+
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
+
+    }
+
     onSubmit = e => {
 
         e.preventDefault();
@@ -249,13 +274,22 @@ class MakeExpressJourney extends Component{
                                    value={this.state.id}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Your Account Number: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.accNo}
-                                   onChange={this.onChangeUserAc}
-                            />
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <label>Your Account Number: </label>
+                                    <input type="text"
+                                           className="form-control"
+                                           value={this.state.accNo}
+                                           onChange={this.onChangeUserAc}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <button onClick={this.getTokenId} style={{ color:"#fff",backgroundColor:"#000",marginTop: "30px"}} className="btn">Get Token Id</button>
+                                </div>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label>Your Token ID: </label>
