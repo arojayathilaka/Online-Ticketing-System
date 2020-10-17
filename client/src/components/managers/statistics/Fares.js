@@ -84,10 +84,10 @@ class Fares extends Component {
 
     render() {
         return (
-            <div>
+            <div className="image-bg-f">
                 <ManagersNavBar/>
                 <div className="fare-header">
-                    <h3 className="mt-1 mb-5">Fare Statistics</h3>
+                    <h4 className="mt-1 mb-5">Fare Statistics</h4>
                     <div className="row">
                         <div className="col-3">
                             <div className="row">
@@ -149,8 +149,8 @@ class Fares extends Component {
                                 pageStyle
                             />
                         </div>
-                    : <h2 className="container mt-4">No Fare Records</h2>
-                : <h2 className="container mt-4">Search to see results</h2>}
+                    : <h2 className="container text-light mt-4">No Fare Records</h2>
+                : <h2 className="container text-light mt-4">Search to see results</h2>}
             </div>
         );
     }

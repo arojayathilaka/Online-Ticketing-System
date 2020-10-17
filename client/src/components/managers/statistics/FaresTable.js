@@ -4,8 +4,8 @@ class FaresTable extends Component{
     render() {
         return(
             <div>
-                <h2 className="mt-4">Number Of Fares : { this.props.journeys.length }</h2>
-                <h2 className="mt-4">Fare Total : </h2>
+                <h2 className="text-light mt-4">Number Of Fares : { this.props.journeys.length }</h2>
+                <h2 className="text-light mt-4">Fare Total : </h2>
                 <table className="table table-bordered table-active mt-3">
                     <thead>
                     <tr>

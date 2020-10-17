@@ -34,15 +34,6 @@ mongoose
     .then(() => console.log('MongoDB database connection established successfully'))
     .catch(err => console.log(err));
 
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://acjayathilake:<password>@cluster0.1s3yg.mongodb.net/<dbname>?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
-
 // use routes
 app.use('/accounts', accountsRouter);
 app.use('/managers', managersRouter);
