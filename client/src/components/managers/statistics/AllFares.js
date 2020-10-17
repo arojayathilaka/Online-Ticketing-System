@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Fares.css';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
+import ReactToPrint from "react-to-print";
 
 class Fares extends Component {
     constructor() {
@@ -64,7 +65,7 @@ class Fares extends Component {
                             <tr key={journey._id}>
                                 <td>{journey.accNo}</td>
                                 <td>{journey.tokenID}</td>
-                                <td>{journey.jDate}</td>
+                                <td>{journey.jDate.substring(0, 10)}</td>
                                 <td>{journey.fare}</td>
                             </tr>
                         ))}
@@ -89,7 +90,7 @@ class Fares extends Component {
                             <tr key={journey._id}>
                                 <td>{journey.acNo}</td>
                                 <td>{journey.tokenID}</td>
-                                <td>{journey.jDate}</td>
+                                <td>{journey.jDate.substring(0, 10)}</td>
                                 <td>{journey.fare}</td>
                             </tr>
                         ))}
