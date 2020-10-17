@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
 import './PassengerJourneyType.css';
+import PassengersNavBar from "../PassengersNavBar";
 
 
 class PassengerJourneyType extends Component{
@@ -14,35 +15,25 @@ class PassengerJourneyType extends Component{
         window.location = '/expressWay'
     }
 
-    onClickPassengerActivity = () => {
-        window.location = '/activityPassenger'
-    }
-
     render() {
         return(
 
             <div className="image-bg-home">
+                <PassengersNavBar/>
                 <div className="btn-bg">
                     <button
                         className="login-home-btn"
-                        style={{ top: "30%" }}
+                        style={{ top: "40%" }}
                         onClick={this.onClickMakeJourney}
                     >
                         Normal Journeys
                     </button>
                     <button
                         className="login-home-btn"
-                        style={{ top: "50%" }}
+                        style={{ top: "60%" }}
                         onClick={this.onClickMakeExpressJourney}
                     >
                         Express Way Journeys
-                    </button>
-                    <button
-                        className="login-home-btn"
-                        style={{ top: "70%" }}
-                        onClick={this.onClickPassengerActivity}
-                    >
-                        Passenger Activities
                     </button>
                 </div>
             </div>

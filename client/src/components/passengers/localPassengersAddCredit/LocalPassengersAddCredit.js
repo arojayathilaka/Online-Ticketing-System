@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
 import './LocalPassengersAddCredit.css';
+import PassengersNavBar from "../PassengersNavBar";
 
 class LocalPassengersAddCredit extends Component{
 
@@ -45,8 +46,8 @@ class LocalPassengersAddCredit extends Component{
 
     sweetalertfunction(){
         swal({
-            title: "Journey details Added",
-            text: "You are Successfully Added new Journey Detail.",
+            title: "Credit details Added",
+            text: "You are Successfully Added Credits.",
             icon: "success",
             button: true,
         }).then(()=>{
@@ -56,7 +57,7 @@ class LocalPassengersAddCredit extends Component{
                 credits: 0,
                 currentBalance: 0
             });
-            window.location = '/activityPassenger'
+            window.location = '/passengerJourneyType'
         });
     }
 
@@ -171,6 +172,7 @@ class LocalPassengersAddCredit extends Component{
         const {tokenType} = this.state;
         return(
             <div className="image-bg-p">
+                <PassengersNavBar/>
                 <div style={{width: "100%", height: "50%",backgroundColor: "#000"}}>
                     <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" disabled={true}>Local Passenger</button>
                     <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" onClick={this.onClickForeignAddCredit}>Foreign Passenger</button>
