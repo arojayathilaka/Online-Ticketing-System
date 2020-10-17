@@ -162,10 +162,6 @@ class LocalPassengersAddCredit extends Component{
     }
 
 
-    onClickForeignAddCredit = () => {
-        window.location = '/foreignPassengersAddCredit'
-    }
-
 
 
     render() {
@@ -173,10 +169,6 @@ class LocalPassengersAddCredit extends Component{
         return(
             <div className="image-bg-p">
                 <PassengersNavBar/>
-                <div style={{width: "100%", height: "50%",backgroundColor: "#000"}}>
-                    <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" disabled={true}>Local Passenger</button>
-                    <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" onClick={this.onClickForeignAddCredit}>Foreign Passenger</button>
-                </div>
 
                 <div className="container">
                     <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Credits</h3>

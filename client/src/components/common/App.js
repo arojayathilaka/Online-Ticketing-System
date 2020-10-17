@@ -36,7 +36,6 @@ class App extends Component  {
                         <Route path="/expressWay" component={MakeExpressJourney} exact/>
                         <Route path="/normalWay" component={MakeJourney} exact/>
                         <Route path="/localPassengerAddCredit" component={LocalPassengersAddCredit} exact/>
-                        <Route path="/foreignPassengersAddCredit" component={foreignPassengersAddCredit} exact/>
                         <Route path="/allFares" component={AllFares} exact/>
                         <Route path="/inspections/viewAll" component={AllInspections} exact/>
                         <Route path="/passengerJourneyType" component={PassengerJourneyType} exact/>
