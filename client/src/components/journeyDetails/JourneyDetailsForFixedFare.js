@@ -66,11 +66,11 @@ class JourneyDetailsForFixedFare extends Component {
 
                     {this.state.journeyDetails.map(journey => (
                         <tr key={journey._id}>
-                            <td>{journey.acNo}</td>
+                            <td>{journey.accNo}</td>
                             <td>{journey.expressWay}</td>
                             <td>{journey.distance}</td>
-                            <td>{journey.jDate}</td>
-                            <td>{journey.jTime}</td>
+                            <td>{journey.jDate.substring(0,10)}</td>
+                            <td>{journey.jTime.substring(16,21)}</td>
                             <td>{journey.fare}</td>
                         </tr>
                     ))}

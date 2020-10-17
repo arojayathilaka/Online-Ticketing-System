@@ -42,6 +42,9 @@ class ManagersNavBar extends Component {
                         <li className="nav-item">
                             <a className="nav-link" href="/managers/fare-stats">Fares</a>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/inspectionReports">Inspections</a>
+                        </li>
                     </ul>
                     {/*<ul className="navbar-nav my-2 my-lg-0">*/}
                     {/*    <li className="nav-item">*/}

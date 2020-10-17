@@ -1,97 +1,116 @@
 import React, {Component} from 'react';
-import axios from 'axios'
-import swal from "sweetalert";
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
+import "react-datepicker/dist/react-datepicker.css"
+import './InspectionsTable'
+import ReactToPrint from "react-to-print";
+import InspectionsTable from "./InspectionsTable";
+import ManagersNavBar from "../managers/ManagersNavBar";
+import './Inspections.css';
 
 class Inspections extends Component {
-
-    constructor(props) {
-        super(props);
-        this.onChangeSelectedDate = this.onChangeSelectedDate.bind(this);
+    constructor() {
+        super();
         this.state = {
-
-            tokenID: '',
-            status: '',
-            inspectorId:'',
-            date: '',
             inspections: [],
-            selectedDate: new Date()
+            searchBy: 'date',
+            filteredInspections: undefined,
+            isSearchedByDate: false,
+            isSearchedByStatus: false,
         }
+    }
+    componentDidMount() {
+        this.loadInspections();
 
     }
-    onChangeSelectedDate = (selectedDate) => {
-        this.setState({
-            selectedDate: selectedDate
-        })
-    };
 
-
-    componentDidMount() {
+    loadInspections = () => {
         axios.get('http://localhost:5000/inspections/')
             .then(res => {
-
-                this.setState({inspections: res.data})
-
+                this.setState({ inspections: res.data })
                 console.log(res.data);
-
             })
-            .catch(error => {
-
-                console.log(error);
-            })
+            .catch(err => console.log(err))
     }
 
+    onChangeSearchBy = e => this.setState({ searchBy: e.target.value })
+
+    onChangeDate = e => this.setState({ date: e.target.value })
+
+    onChangeStatus = e => this.setState({ status: e.target.value })
+
+    onClickSearch = () => {
+        if (this.state.searchBy === 'date') {
+            if (this.state.isSearchedByDate ) {
+                this.setState({
+                    filteredInspections: this.state.inspections.filter(j => j.date.substring(0, 10) === this.state.date)
+                })
+            }
+            this.setState({isSearchedByDate: true})
+        }
+        else if (this.state.searchBy === 'status'){
+            if (this.state.isSearchedByStatus ){
+                this.setState({
+                    filteredInspections: this.state.inspections.filter(j => j.status === this.state.status)
+                })
+            }
+            this.setState({ isSearchedByStatus: true })
+        }
+    }
 
     render() {
         return (
-            <div className="container">
-                <h3 style={{color: "#4A235A"}}>Generate Inspection Report</h3>
-                <br/>
-                <div className="row">
-                    <div className="col-3 ">
-                    <label class="font-weight-bold">Pick Date:</label>
-                </div>
-                    <div className="col-3" style={{marginLeft: "-200px"}}>
-                        <DatePicker
-                            selected={this.state.selectedDate}
-                            onChange={this.onChangeSelectedDate}
-                        />
+            <div>
+                <ManagersNavBar/>
+                <div className="inspection-header">
+                    <h3 className="mt-1 mb-5">Inspections</h3>
+                    <div className="row">
+                        <div className="col-3">
+                            <div className="row">
+                                <div className="col my-2">
+                                    <label>Search By : </label>
+                                </div>
+                                <div className="col">
+                                    <select className="form-control" onChange={this.onChangeSearchBy}>
+                                        <option value="date">Date</option>
+                                        <option value="status">Status</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-3">
+                           <input type="date"
+                                  className={this.state.searchBy === 'date' ? "form-control show" : "hide"}
+                                  onChange={this.onChangeDate}
+                           />
+                            <select
+                                className={this.state.searchBy === 'status' ? "form-control show" : "hide"}
+                                onChange={this.onChangeStatus}>
+                                <option defaultValue>Choose...</option>
+                                <option value="valid">Valid</option>
+                                <option value="invalid">Invalid</option>
+                            </select>
+                        </div>
+                        <div className="col-3">
+                            <button className="btn btn-primary" onClick={this.onClickSearch}>Search</button>
+                            <button className="btn btn-primary mx-2" onClick={()=> window.location = "/inspections/viewAll"}>View All</button>
+                        </div>
                     </div>
-                    <div className="col-3" style={{marginLeft: "200px"}}>
-                    <button className="btn btn-primary">Generate</button>
                 </div>
-                </div>
-                <br/>
-                <table className="table table-dark table-hover" >
-                    <thead >
-                    <tr>
-                        <th scope="col">Token</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Inspector ID</th>
-                        <th scope="col">Date</th>
-                    </tr>
-                    </thead>
-                    <tbody style={{backgroundColor:"#A09D9C"}}>
-
-                    {this.state.inspections.map(inspection => (
-                        <tr key={inspection._id}>
-                            <td>{inspection.tokenId}</td>
-                            <td>{inspection.status}</td>
-                            <td>{inspection.inspectorId}</td>
-                            <td>{inspection.date}</td>
-                        </tr>
-                    ))}
-
-                    </tbody>
-                </table>
-
+                {this.state.filteredInspections !== undefined ? // check whether searching has not been done yet
+                    this.state.filteredInspections.length !== 0 ? // check whether no results found
+                        <div className="container">
+                            <InspectionsTable inspections={this.state.filteredInspections} ref={el => this.componentRef = el} />
+                            <ReactToPrint
+                                trigger={() => {return <button className="btn btn-primary">Generate Report</button>}}
+                                content={() => this.componentRef}
+                                pageStyle
+                            />
+                        </div>
+                    : <h2 className="container mt-4">No Inspections Found</h2>
+                : <h2 className="container mt-4">Search to see results</h2>}
             </div>
-
         );
-
     }
-
 }
 
-export default Inspections
+export default Inspections;

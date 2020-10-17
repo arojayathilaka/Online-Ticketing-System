@@ -72,8 +72,8 @@ class JourneyDetailsForVariableFare extends Component {
                             <td>{journey.startPoint}</td>
                             <td>{journey.desPoint}</td>
                             <td>{journey.distance}</td>
-                            <td>{journey.jDate}</td>
-                            <td>{journey.jTime}</td>
+                            <td>{journey.jDate.substring(0,10)}</td>
+                            <td>{journey.jTime.substring(16,21)}</td>
                             <td>{journey.fare}</td>
                         </tr>
                     ))}
