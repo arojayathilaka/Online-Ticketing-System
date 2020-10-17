@@ -45,6 +45,7 @@ class PassengerLogin extends Component {
                 icon:"success",
                 button: { className: "swal-btn"}
             });
+            window.location = '/passengerJourneyType'
         } else{
             console.log('failed')
             swal({

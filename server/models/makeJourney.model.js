@@ -12,7 +12,7 @@ const journeySchema = new Schema(
         appFare: {type: String, required: true},
         distance: {type: Number, required: true},
         jDate: {type: Date, required: true},
-        jTime: {type: String, required: true},
+        jTime: {type: Date, required: true},
         fare: {type: Number, required: true}
     },
     {

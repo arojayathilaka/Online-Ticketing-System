@@ -3,6 +3,7 @@ import axios from 'axios'
 import swal from "sweetalert";
 import './MakeJourney.css';
 import DatePicker from "react-datepicker";
+import PassengersNavBar from "../PassengersNavBar";
 
 
 class MakeJourney extends Component{
@@ -11,7 +12,6 @@ class MakeJourney extends Component{
         super(props);
 
         this.onChangeUserAc = this.onChangeUserAc.bind(this);
-        this.onChangeTokenId = this.onChangeTokenId.bind(this);
         this.onChangeStartPoint = this.onChangeStartPoint.bind(this);
         this.onChangeDesPoint = this.onChangeDesPoint.bind(this);
         this.onChangeDistance = this.onChangeDistance.bind(this);
@@ -20,6 +20,7 @@ class MakeJourney extends Component{
         this.calculateTotalBill = this.calculateTotalBill.bind(this);
         this.sweetalertfunction = this.sweetalertfunction.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.getTokenId = this.getTokenId.bind(this);
 
         this.state = {
             id: '',
@@ -33,7 +34,8 @@ class MakeJourney extends Component{
             jTime: '',
             fare: 0,
             accountDetails: [],
-            credit: 0
+            credit: 0,
+            tokenDetails: []
         }
 
     }
@@ -45,11 +47,6 @@ class MakeJourney extends Component{
         });
     }
 
-    onChangeTokenId(e){
-        this.setState({
-            tokenID: e.target.value
-        });
-    }
 
     onChangeStartPoint(e){
         this.setState({
@@ -75,9 +72,9 @@ class MakeJourney extends Component{
         });
     }
 
-    onChangeTime(e){
+    onChangeTime(time){
         this.setState({
-            jTime: e.target.value
+            jTime: time
         });
     }
 
@@ -116,6 +113,7 @@ class MakeJourney extends Component{
                 jTime: '',
                 fare: 0
             });
+            window.location = '/passengerJourneyType'
         });
     }
 
@@ -131,6 +129,30 @@ class MakeJourney extends Component{
 
 
 
+
+    }
+
+    getTokenId(e){
+
+        e.preventDefault();
+
+        axios.get('http://localhost:5000/tokens/')
+            .then(response =>{
+                console.log(response);
+                this.setState({tokenDetails: response.data})
+                for (var i = 0;i < this.state.tokenDetails.length;i++){
+                    if (this.state.tokenDetails[i].accNo === this.state.accNo){
+                        this.setState({
+                            tokenID: this.state.tokenDetails[i].tokenID
+                        })
+                    }
+
+                }
+
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
 
     }
 
@@ -195,10 +217,12 @@ class MakeJourney extends Component{
                 console.log(error);
             });
 
+
         axios.post('http://localhost:5000/journey/add', journey)
             .then(res => {
                 if (res.status === 200) {
                     this.sweetalertfunction();
+
                 }
                 else {
                     swal({
@@ -218,11 +242,12 @@ class MakeJourney extends Component{
     render() {
         return(
             <div className="image-bg-p">
+                <PassengersNavBar/>
 
                 <div className="container">
                     <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Journey Details</h3>
 
-                    <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"rgba(226, 223, 223, 0.65)",marginTop: "50px"}}>
+                    <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"rgba(226, 223, 223, 0.65)",marginTop: "30px"}}>
                         <div className="form-group">
                             <label>Journey Id: </label>
                             <input type="text"
@@ -230,13 +255,22 @@ class MakeJourney extends Component{
                                    value={this.state.id}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Your Account Number: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.accNo}
-                                   onChange={this.onChangeUserAc}
-                            />
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <label>Your Account Number: </label>
+                                    <input type="text"
+                                           className="form-control"
+                                           value={this.state.accNo}
+                                           onChange={this.onChangeUserAc}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <button onClick={this.getTokenId} style={{ color:"#fff",backgroundColor:"#000",marginTop: "30px"}} className="btn">Get Token Id</button>
+                                </div>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label>Your Token ID: </label>
@@ -282,9 +316,13 @@ class MakeJourney extends Component{
                         </div>
                         <div className="form-group">
                             <label>Journey Time: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.jTime}
+                            <DatePicker
+                                   selected={this.state.jTime}
+                                   showTimeSelect
+                                   showTimeSelectOnly
+                                   timeIntervals={15}
+                                   timeCaption="Time"
+                                   dateFormat="h:mm aa"
                                    onChange={this.onChangeTime}
                             />
                         </div>
@@ -300,7 +338,7 @@ class MakeJourney extends Component{
                         </div>
 
                         <div className="form-group">
-                            <input type="submit" value="Add Journey" style={{ color:"#fff",backgroundColor:"#000"}} className="btn"/>
+                            <input type="submit" value="Add Journey" style={{ color:"#fff"}} className="btn btn-primary"/>
                         </div>
                     </form>
                 </div>

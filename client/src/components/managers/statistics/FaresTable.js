@@ -4,8 +4,9 @@ class FaresTable extends Component{
     render() {
         return(
             <div>
-                <h2 className="mt-4">{ this.props.journeys.length } fares</h2>
-                <table className="table table-bordered table-active mt-3">
+                <h2 className="text-light mt-4">Number Of Fares : { this.props.journeys.length }</h2>
+                <h2 className="text-light mt-4">Fare Total : </h2>
+                <table className="table table-dark table-hover mt-3">
                     <thead>
                     <tr>
                         <th>Account Number</th>
@@ -14,7 +15,7 @@ class FaresTable extends Component{
                         <th>Fare</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{backgroundColor:"#A09D9C"}}>
                     {this.props.journeys.map(j => (
                         <tr key={j._id}>
                             <td>{j.accNo}</td>

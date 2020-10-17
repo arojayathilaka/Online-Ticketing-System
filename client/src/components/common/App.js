@@ -16,6 +16,7 @@ import LocalPassengersAddCredit from "../passengers/localPassengersAddCredit/Loc
 import foreignPassengersAddCredit from "../passengers/foreignPassengers/foreignPassengersAddCredit";
 import AllFares from "../managers/statistics/AllFares"
 import AllInspections from "../inspections/AllInspections"
+import PassengerJourneyType from "../passengers/passengerJourneyType/PassengerJourneyType";
 
 
 class App extends Component  {
@@ -38,6 +39,7 @@ class App extends Component  {
                         <Route path="/foreignPassengersAddCredit" component={foreignPassengersAddCredit} exact/>
                         <Route path="/allFares" component={AllFares} exact/>
                         <Route path="/inspections/viewAll" component={AllInspections} exact/>
+                        <Route path="/passengerJourneyType" component={PassengerJourneyType} exact/>
                     </Switch>
                 </Router>
             </div>
