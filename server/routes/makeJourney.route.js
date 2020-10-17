@@ -21,13 +21,14 @@ router.route('/add').post((req, res) => {
     const desPoint = req.body.desPoint;
     const appFare = req.body.appFare;
     const distance = Number(req.body.distance);
-    const jDate = req.body.jDate;
-    const jTime = req.body.jTime;
+    const jDate = Date.parse(req.body.jDate);
+    const jTime = Date.parse(req.body.jTime);
     const fare = Number(req.body.fare);
 
     console.log(req.body);
 
     const newJourney = new Journey({ id, accNo, tokenID, startPoint, desPoint, appFare, distance, jDate, jTime, fare });
+    console.log(req.body);
     newJourney.save()
         .then(() => res.send({message: 'Journey Added!'}))
         .catch(err =>

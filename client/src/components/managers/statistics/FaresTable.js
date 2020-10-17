@@ -19,7 +19,7 @@ class FaresTable extends Component{
                         <tr key={j._id}>
                             <td>{j.accNo}</td>
                             <td>{j.tokenID}</td>
-                            <td>{j.jDate}</td>
+                            <td>{j.jDate.substring(0, 10)}</td>
                             <td>{j.fare}</td>
                         </tr>
                     ))}

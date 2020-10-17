@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ManagersNavBar from "../ManagersNavBar";
 import axios from 'axios';
 import './Fares.css';
-/*import DatePicker from 'react-datepicker';*/
 import "react-datepicker/dist/react-datepicker.css"
 import './FaresTable'
 import ReactToPrint from "react-to-print";
@@ -14,7 +13,7 @@ class Fares extends Component {
         this.state = {
             journeys: [],
             expressJourneys: [],
-            searchBy: '',
+            searchBy: 'date',
             filteredJourneys: undefined,
             isSearchedByDate: false,
             isSearchedByDay: false,
@@ -26,57 +25,60 @@ class Fares extends Component {
         this.loadExpressJourneys();
     }
 
-    loadJourneys(){
-        axios.get('http://localhost:5000/journey')
-            .then(res => this.setState({ journeys: res.data }))
+    loadJourneys = () => {
+        axios.get('/journey')
+            .then(res => {
+                this.setState({ journeys: res.data })
+                console.log(res.data);
+            })
             .catch(err => console.log(err))
-        console.log(this.state.journeys);
     }
 
-    loadExpressJourneys(){
-        axios.get('http://localhost:5000/express')
-            .then(res => this.setState({ expressJourneys: res.data }))
+    loadExpressJourneys = () => {
+        axios.get('/express')
+            .then(res => {
+                this.setState({expressJourneys: res.data})
+                console.log(res.data);
+            })
             .catch(err => console.log(err))
-        console.log(this.state.expressJourneys);
     }
 
-    onChangeSearchBy = e => {
-        this.setState({ searchBy: e.target.value })
-    }
+    onChangeSearchBy = e => this.setState({ searchBy: e.target.value })
 
-    onChangeDate = e => {
-        this.setState({ date: e.target.value })
-    }
+    onChangeDate = e => this.setState({ date: e.target.value })
 
-    onChangeDay = e => {
-        this.setState({ day: e.target.value })
-    }
+    onChangeDay = e => this.setState({ day: e.target.value })
 
     onClickSearch = () => {
         if (this.state.searchBy === 'date'){
 
             if (this.state.isSearchedByDate || (!this.state.isSearchedByDate && !this.state.isSearchedByDay)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => j.jDate.substring(0, 3) === this.state.date)
+                    filteredJourneys: this.state.journeys.filter(j => j.jDate.substring(0, 10) === this.state.date)
                 })
             } else if (this.state.isSearchedByDay){
                 this.setState({
-                    filteredJourneys: this.state.filteredJourneys.filter(j => j.jDate.substring(0, 3) === this.state.date)
+                    filteredJourneys: this.state.filteredJourneys.filter(j => j.jDate.substring(0, 10) === this.state.date)
                 })
             }
             this.setState({isSearchedByDate: true})
+            /*this.setState({filteredJourneys: this.state.journeys.filter(j => j.jDate.substring(0, 10) === this.state.date)})
+            this.setState({isSearchedByDate: true})*/
+
         } else if (this.state.searchBy === 'day'){
 
             if (this.state.isSearchedByDay || (!this.state.isSearchedByDay && !this.state.isSearchedByDate)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => j.jDate === this.state.day)
+                    filteredJourneys: this.state.journeys.filter(j => new Date(j.jDate).getDay().toString() === this.state.day)
                 })
-            }else if (this.state.isSearchedByDate){
+            } else if (this.state.isSearchedByDate){
                 this.setState({
-                    filteredJourneys: this.state.filteredJourneys.filter(j => j.jDate === this.state.day)
+                    filteredJourneys: this.state.journeys.filter(j => new Date(j.jDate).getDay().toString() === this.state.day)
                 })
             }
             this.setState({ isSearchedByDay: true })
+            /*this.setState({filteredJourneys: this.state.journeys.filter(j => new Date(j.jDate).getDay().toString() === this.state.day)});
+            this.setState({isSearchedByDay: true})*/
         }
     }
 
@@ -109,14 +111,14 @@ class Fares extends Component {
                             <select
                                 className={this.state.searchBy === 'day' ? "form-control show" : "hide"}
                                 onChange={this.onChangeDay}>
-                                <option selected>Choose...</option>
-                                <option value="Mon">Monday</option>
-                                <option value="Tue">Tuesday</option>
-                                <option value="Wed">Wednesday</option>
-                                <option value="Thu">Thursday</option>
-                                <option value="Fri">Friday</option>
-                                <option value="Sat">Saturday</option>
-                                <option value="Sun">Sunday</option>
+                                <option defaultValue>Choose...</option>
+                                <option value="2">Monday</option>
+                                <option value="3">Tuesday</option>
+                                <option value="4">Wednesday</option>
+                                <option value="5">Thursday</option>
+                                <option value="6">Friday</option>
+                                <option value="0">Saturday</option>
+                                <option value="1">Sunday</option>
                             </select>
                         </div>
                         <div className="col-3 my-2">

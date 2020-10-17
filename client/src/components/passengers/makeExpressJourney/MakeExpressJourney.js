@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
 import './MakeExpressJourney.css';
+import DatePicker from "react-datepicker";
 
 
 class MakeExpressJourney extends Component{
@@ -17,6 +18,7 @@ class MakeExpressJourney extends Component{
         this.calculateTotalBill = this.calculateTotalBill.bind(this);
         //this.onSubmit = this.onSubmit.bind(this);
         this.sweetalertfunction = this.sweetalertfunction.bind(this);
+        this.getTokenId = this.getTokenId.bind(this);
 
         this.state = {
             id: '',
@@ -53,15 +55,15 @@ class MakeExpressJourney extends Component{
     }
 
 
-    onChangeDate(e){
+    onChangeDate(date){
         this.setState({
-            jDate: e.target.value
+            jDate: date
         });
     }
 
-    onChangeTime(e){
+    onChangeTime(time){
         this.setState({
-            jTime: e.target.value
+            jTime: time
         });
     }
 
@@ -99,6 +101,7 @@ class MakeExpressJourney extends Component{
                 jTime: '',
                 fare: 0
             });
+            window.location = '/passengerJourneyType'
         });
     }
 
@@ -142,6 +145,30 @@ class MakeExpressJourney extends Component{
                 fare: 450
             });
         }
+
+    }
+
+    getTokenId(e){
+
+        e.preventDefault();
+
+        axios.get('http://localhost:5000/tokens/')
+            .then(response =>{
+                console.log(response);
+                this.setState({tokenDetails: response.data})
+                for (var i = 0;i < this.state.tokenDetails.length;i++){
+                    if (this.state.tokenDetails[i].accNo === this.state.accNo){
+                        this.setState({
+                            tokenID: this.state.tokenDetails[i].tokenID
+                        })
+                    }
+
+                }
+
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
 
     }
 
@@ -247,13 +274,22 @@ class MakeExpressJourney extends Component{
                                    value={this.state.id}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Your Account Number: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.accNo}
-                                   onChange={this.onChangeUserAc}
-                            />
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <label>Your Account Number: </label>
+                                    <input type="text"
+                                           className="form-control"
+                                           value={this.state.accNo}
+                                           onChange={this.onChangeUserAc}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <button onClick={this.getTokenId} style={{ color:"#fff",backgroundColor:"#000",marginTop: "30px"}} className="btn">Get Token Id</button>
+                                </div>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label>Your Token ID: </label>
@@ -279,18 +315,21 @@ class MakeExpressJourney extends Component{
                         </div>
                         <div className="form-group">
                             <label>Journey Date: </label>
-                            <input type="date"
-                                   className="form-control"
-                                   value={this.state.jDate}
+                            <DatePicker
+                                   selected={this.state.jDate}
                                    onChange={this.onChangeDate}
                             />
                         </div>
                         <div className="form-group">
                             <label>Journey Time: </label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.jTime}
-                                   onChange={this.onChangeTime}
+                            <DatePicker
+                                selected={this.state.jTime}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={15}
+                                timeCaption="Time"
+                                dateFormat="h:mm aa"
+                                onChange={this.onChangeTime}
                             />
                         </div>
                         <div className="form-group">

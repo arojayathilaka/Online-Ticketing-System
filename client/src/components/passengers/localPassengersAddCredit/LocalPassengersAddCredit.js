@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
 import './LocalPassengersAddCredit.css';
+import PassengersNavBar from "../PassengersNavBar";
 
 class LocalPassengersAddCredit extends Component{
 
@@ -45,8 +46,8 @@ class LocalPassengersAddCredit extends Component{
 
     sweetalertfunction(){
         swal({
-            title: "Journey details Added",
-            text: "You are Successfully Added new Journey Detail.",
+            title: "Credit details Added",
+            text: "You are Successfully Added Credits.",
             icon: "success",
             button: true,
         }).then(()=>{
@@ -56,6 +57,7 @@ class LocalPassengersAddCredit extends Component{
                 credits: 0,
                 currentBalance: 0
             });
+            window.location = '/passengerJourneyType'
         });
     }
 
@@ -160,6 +162,9 @@ class LocalPassengersAddCredit extends Component{
     }
 
 
+    onClickForeignAddCredit = () => {
+        window.location = '/foreignPassengersAddCredit'
+    }
 
 
 
@@ -167,9 +172,14 @@ class LocalPassengersAddCredit extends Component{
         const {tokenType} = this.state;
         return(
             <div className="image-bg-p">
+                <PassengersNavBar/>
+                <div style={{width: "100%", height: "50%",backgroundColor: "#000"}}>
+                    <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" disabled={true}>Local Passenger</button>
+                    <button style={{ color:"#fff",backgroundColor:"#000"}} className="btn" onClick={this.onClickForeignAddCredit}>Foreign Passenger</button>
+                </div>
 
                 <div className="container">
-                    <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Credits (Foreign Passenger)</h3>
+                    <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Credits</h3>
 
                     <form onSubmit={this.onSubmit} className="jumbotron" style={{backgroundColor:"rgba(226, 223, 223, 0.65)",marginTop: "50px"}}>
                         <div className="form-group">
