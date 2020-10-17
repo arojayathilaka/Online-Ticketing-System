@@ -104,7 +104,7 @@ class Passengers extends Component {
 
     render() {
         return (
-            <div>
+            <div className="image-bg-ps">
                 <ManagersNavBar/>
                 <div className="passenger-header">
                     <h4 className="mt-1 mb-5">Passenger Statistics</h4>
@@ -172,8 +172,8 @@ class Passengers extends Component {
                                 pageStyle
                             />
                         </div>
-                    : <h2 className="container mt-4">No passengers</h2>
-                : <h2 className="container mt-4">Search to see results</h2>}
+                    : <h2 className="container mt-4 text-light">No passengers</h2>
+                : <h2 className="container mt-4 text-light">Search to see results</h2>}
             </div>
         );
     }
