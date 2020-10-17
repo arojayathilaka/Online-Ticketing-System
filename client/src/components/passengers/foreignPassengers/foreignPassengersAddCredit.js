@@ -211,7 +211,7 @@ class foreignPassengersAddCredit extends Component{
                             />
                         </div>
                         <div className="form-group">
-                            <label>Your Account Number: </label>
+                            <label>Your Passport Id: </label>
                             <input type="text"
                                    className="form-control"
                                    value={this.state.accNo}
