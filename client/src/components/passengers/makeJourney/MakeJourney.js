@@ -21,6 +21,7 @@ class MakeJourney extends Component{
         this.sweetalertfunction = this.sweetalertfunction.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.getTokenId = this.getTokenId.bind(this);
+        this.onChangePassengerType = this.onChangePassengerType.bind(this);
 
         this.state = {
             id: '',
@@ -35,7 +36,9 @@ class MakeJourney extends Component{
             fare: 0,
             accountDetails: [],
             credit: 0,
-            tokenDetails: []
+            tokenDetails: [],
+            passenger: '',
+            check: false
         }
 
     }
@@ -78,6 +81,12 @@ class MakeJourney extends Component{
         });
     }
 
+    onChangePassengerType(e){
+        this.setState({
+            passenger: e.target.value
+        });
+    }
+
     componentDidMount() {
 
         axios.get('http://localhost:5000/journey/getId')
@@ -111,7 +120,8 @@ class MakeJourney extends Component{
                 distance: 0,
                 jDate: '',
                 jTime: '',
-                fare: 0
+                fare: 0,
+                passenger: ''
             });
             window.location = '/passengerJourneyType'
         });
@@ -181,6 +191,38 @@ class MakeJourney extends Component{
                 for (var i = 0;i < this.state.accountDetails.length;i++){
                     if (this.state.accountDetails[i].accNo === this.state.accNo){
                         console.log(this.state.accountDetails[i].credit)
+                        if (this.state.passenger === "Foreign") {
+                            if (this.state.accountDetails[i].credit < 0) {
+                                console.log("hi");
+                                this.setState({
+                                    check: true
+                                })
+                                swal({
+                                    title: "Credit Insufficient",
+                                    text: "Your credit amount is insufficient, Please renew.",
+                                    icon: "error",
+                                    button: true,
+                                    dangerMode: true,
+                                }).then(()=>{
+                                    this.setState({
+                                        id: '',
+                                        accNo: '',
+                                        tokenID: '',
+                                        startPoint: '',
+                                        desPoint: '',
+                                        appFare: 'Variable',
+                                        distance: 0,
+                                        jDate: '',
+                                        jTime: '',
+                                        fare: 0,
+                                        passenger: ''
+                                    });
+                                    window.location = '/passengerJourneyType'
+                                });
+
+                            }
+
+                        }
                         this.setState({
                             credit: this.state.accountDetails[i].credit - this.state.fare
                         })
@@ -196,6 +238,7 @@ class MakeJourney extends Component{
                     .then(res => {
                             console.log(res);
                             if (res.status === 200) {
+
                                 //this.sweetalertfunction();
                                 console.log("hi");
                             }
@@ -221,7 +264,10 @@ class MakeJourney extends Component{
         axios.post('http://localhost:5000/journey/add', journey)
             .then(res => {
                 if (res.status === 200) {
-                    this.sweetalertfunction();
+                    if (this.state.check === false){
+                        this.sweetalertfunction();
+                    }
+                    //
 
                 }
                 else {
@@ -255,10 +301,17 @@ class MakeJourney extends Component{
                                    value={this.state.id}
                             />
                         </div>
+                        <div className="form-group">
+                            <label>Passenger Type: </label>
+                            <select value={this.state.passenger} onChange={this.onChangePassengerType}>
+                                <option selected value="Local">Local Passenger</option>
+                                <option value="Foreign">Foreign Passenger</option>
+                            </select>
+                        </div>
                         <div className="row">
                             <div className="col-6">
                                 <div className="form-group">
-                                    <label>Your Account Number: </label>
+                                    <label>Your Account Number/Passport Id: </label>
                                     <input type="text"
                                            className="form-control"
                                            value={this.state.accNo}
