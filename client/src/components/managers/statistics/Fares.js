@@ -134,7 +134,7 @@ class Fares extends Component {
                             </div>
                         </div>
                         <div className="col-3">
-                            <button className="btn btn-primary" onClick={this.onClickSearch}>Search</button>
+                            <button className="btn btn-primary" onClick={this.onClickSearch} disabled={!this.state.day && !this.state.date}>Search</button>
                             <button className="btn btn-primary mx-2" onClick={()=> window.location = "/allFares"}>View All Fares</button>
                         </div>
                     </div>
