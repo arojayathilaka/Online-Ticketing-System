@@ -47,7 +47,7 @@ class ManagerLogin extends Component {
             })
                 .then(result => {
                     if (result)
-                        window.location = '/managers/main'
+                        window.location = '/managers/passenger-stats'
                 })
         } else{
             console.log('failed')
