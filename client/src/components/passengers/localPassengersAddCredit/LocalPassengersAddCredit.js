@@ -240,7 +240,7 @@ class LocalPassengersAddCredit extends Component{
                         </div>
 
                         <div className="form-group">
-                            <input type="submit" value="Add Credit" style={{ color:"#fff",backgroundColor:"#000"}} className="btn"/>
+                            <input type="submit" value="Add Credit" style={{ color:"#fff"}} className="btn btn-primary"/>
                         </div>
                     </form>
                 </div>

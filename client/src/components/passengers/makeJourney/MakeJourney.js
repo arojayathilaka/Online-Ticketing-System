@@ -3,6 +3,7 @@ import axios from 'axios'
 import swal from "sweetalert";
 import './MakeJourney.css';
 import DatePicker from "react-datepicker";
+import PassengersNavBar from "../PassengersNavBar";
 
 
 class MakeJourney extends Component{
@@ -241,6 +242,7 @@ class MakeJourney extends Component{
     render() {
         return(
             <div className="image-bg-p">
+                <PassengersNavBar/>
 
                 <div className="container">
                     <h3 style={{color: "#fff",paddingTop: "50px"}}>Add Your Journey Details</h3>
@@ -336,7 +338,7 @@ class MakeJourney extends Component{
                         </div>
 
                         <div className="form-group">
-                            <input type="submit" value="Add Journey" style={{ color:"#fff",backgroundColor:"#000"}} className="btn"/>
+                            <input type="submit" value="Add Journey" style={{ color:"#fff"}} className="btn btn-primary"/>
                         </div>
                     </form>
                 </div>
