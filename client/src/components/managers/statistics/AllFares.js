@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import ManagersNavBar from "../ManagersNavBar";
 import axios from 'axios';
 import './Fares.css';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
-import ReactToPrint from "react-to-print";
 
 class Fares extends Component {
     constructor() {
