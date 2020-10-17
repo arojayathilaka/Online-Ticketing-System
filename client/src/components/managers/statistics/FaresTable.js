@@ -1,11 +1,19 @@
 import React, {Component} from "react";
 
 class FaresTable extends Component{
+    getTotalFare() {
+        let total = 0;
+        this.props.journeys.map(j => {
+            total += j.fare;
+        });
+        return total;
+    }
+
     render() {
         return(
             <div>
                 <h2 className="text-light mt-4">Number Of Fares : { this.props.journeys.length }</h2>
-                {/*<h2 className="text-light mt-4">Fare Total : </h2>*/}
+                <h2 className="text-light mt-4">Fare Total : { this.getTotalFare() }</h2>
                 <table className="table table-dark table-hover mt-3">
                     <thead>
                     <tr>
