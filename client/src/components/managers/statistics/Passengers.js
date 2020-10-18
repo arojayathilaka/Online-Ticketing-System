@@ -90,7 +90,7 @@ class Passengers extends Component {
             // if user has searched by time previously or if this is the 1st time searching is being done, filter all journeys
             if (this.state.isSearchedByTime || (!this.state.isSearchedByLoc && !this.state.isSearchedByDay && !this.state.isSearchedByTime)){
                 this.setState({
-                    filteredJourneys: this.state.journeys.filter(j => j.jTime.substring(16, 21) === this.state.time)
+                    filteredJourneys: this.state.journeys.filter(j =>  j.jTime.substring(11, 16) === this.state.time)
                 })
             // if user haven't searched by time previously but have searched by day or location filter previously filtered journeys
             } else if (this.state.isSearchedByLoc|| this.state.isSearchedByDay) {
