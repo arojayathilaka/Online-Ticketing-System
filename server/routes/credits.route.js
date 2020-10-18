@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const Credit = require('../models/credits.model');
 
+/**
+ * get details of all credits in the database
+ */
 router.route('/').get((req, res) => {
 
     Credit.find()
@@ -12,6 +15,9 @@ router.route('/').get((req, res) => {
         );
 });
 
+/**
+ * adding credit details, when passenger added some credit amount
+ */
 router.route('/add').post((req, res) => {
 
     const tokenType = req.body.tokenType;

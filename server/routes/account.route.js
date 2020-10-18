@@ -83,7 +83,9 @@ router.route('/viewAcc').post((req, res) => {
             res.status(400).json('Error: ' + err)
         );
 });*/
-
+/**
+ * Update the credit amount of the passenger of relevant account number
+ */
 router.route('/update').put((req, res) => {
 
     const accNo = req.body.accNo;

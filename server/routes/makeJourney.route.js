@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const Journey = require('../models/makeJourney.model');
 
+/**
+ * get all details relevant to normal journeys
+ */
 router.route('/').get((req, res) => {
 
     Journey.find()
@@ -12,6 +15,9 @@ router.route('/').get((req, res) => {
         );
 });
 
+/**
+ * adding journey details to the database
+ */
 router.route('/add').post((req, res) => {
 
     const id = req.body.id;
