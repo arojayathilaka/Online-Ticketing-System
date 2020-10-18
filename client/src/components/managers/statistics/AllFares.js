@@ -34,7 +34,7 @@ class Fares extends Component {
 
     render() {
         return (
-            <div className="image-bg-ps">
+            <div className="image-bg-af">
                 <ManagersNavBar/>
                 <div className="all-fares-header">
                     <br/>

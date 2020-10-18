@@ -4,7 +4,7 @@ class InspectionsTable extends Component {
     render() {
         return (
             <div className="container">
-                <h2 className="mt-4">Number of inspections:  { this.props.inspections.length } </h2>
+                <h2 className="mt-4 text-light">Number of inspections:  { this.props.inspections.length } </h2>
                 <table className="table table-dark table-hover">
                     <thead>
                     <tr>
