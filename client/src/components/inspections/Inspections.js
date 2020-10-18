@@ -59,7 +59,7 @@ class Inspections extends Component {
 
     render() {
         return (
-            <div>
+            <div className="image-bg-f-n">
                 <ManagersNavBar/>
                 <div className="inspection-header">
                     <h3 className="mt-1 mb-5">Inspections</h3>
@@ -106,8 +106,8 @@ class Inspections extends Component {
                                 pageStyle
                             />
                         </div>
-                    : <h2 className="container mt-4">No Inspections Found</h2>
-                : <h2 className="container mt-4">Search to see results</h2>}
+                    : <h2 className="container mt-4 text-light">No Inspections Found</h2>
+                : <h2 className="container mt-4 text-light">Search to see results</h2>}
             </div>
         );
     }

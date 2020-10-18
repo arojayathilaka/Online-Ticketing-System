@@ -18,7 +18,7 @@
     transform: translate(-50%, -50%);
 }
 
-.image-bg-home {
+.image-bg-h {
     /*background: url(images/bg.jpg) no-repeat center center fixed;*/
     /*background-size: cover;*/
     /*height: 100%;*/
@@ -28,7 +28,7 @@
     /*height: 100%;*/
     /*width: 100%;*/
     min-height: 100vh;
-    background-image: url(../../../images/busses.jpg);
+    background-image: url(../../../images/busstation.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

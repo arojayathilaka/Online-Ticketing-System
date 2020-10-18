@@ -23,3 +23,11 @@
     background-color: #ffffff;
 
 }
+
+.image-bg-f-n {
+    min-height: 100vh;
+    background-image: url(../../images/busstation-light.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
