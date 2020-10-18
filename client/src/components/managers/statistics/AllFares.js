@@ -86,7 +86,7 @@ class Fares extends Component {
                         <tbody style={{backgroundColor:"#A09D9C"}}>
                         {this.state.expressJourneys.map(journey => (
                             <tr key={journey._id}>
-                                <td>{journey.acNo}</td>
+                                <td>{journey.accNo}</td>
                                 <td>{journey.tokenID}</td>
                                 <td>{journey.jDate.substring(0, 10)}</td>
                                 <td>{journey.fare}</td>
