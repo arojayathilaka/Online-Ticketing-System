@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ManagersNavBar from "../ManagersNavBar";
+import ManagersNavBar from "../../ManagersNavBar";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css"
 import './AllFares.css'

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ManagersNavBar from "../ManagersNavBar";
+import ManagersNavBar from "../../ManagersNavBar";
 import axios from 'axios';
 import './Passengers.css';
 import ReactToPrint from 'react-to-print';
