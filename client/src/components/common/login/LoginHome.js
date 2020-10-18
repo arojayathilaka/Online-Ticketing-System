@@ -13,7 +13,7 @@ class LoginHome extends Component {
 
     render() {
         return (
-                <div className="image-bg-home">
+                <div className="image-bg-h">
                     <div className="btn-bg">
                         <button
                             className="login-home-btn"
