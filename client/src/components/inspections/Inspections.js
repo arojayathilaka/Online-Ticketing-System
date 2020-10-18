@@ -59,7 +59,7 @@ class Inspections extends Component {
 
     render() {
         return (
-            <div>
+            <div className="image-bg-f-n">
                 <ManagersNavBar/>
                 <div className="inspection-header">
                     <h3 className="mt-1 mb-5">Inspections</h3>

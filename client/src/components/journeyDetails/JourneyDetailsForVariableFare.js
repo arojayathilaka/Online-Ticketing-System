@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import swal from "sweetalert";
+import PassengersNavBar from "../passengers/PassengersNavBar";
 
 class JourneyDetailsForVariableFare extends Component {
 
@@ -43,6 +44,8 @@ class JourneyDetailsForVariableFare extends Component {
 
     render() {
         return (
+            <div>
+                <PassengersNavBar/>
             <div className="container">
                 <h3 style={{color: "#4A235A"}}>Normal Journey Details</h3>
                 <br/>
@@ -80,6 +83,7 @@ class JourneyDetailsForVariableFare extends Component {
 
                     </tbody>
                 </table>
+            </div>
             </div>
 
         );
